@@ -5,7 +5,7 @@
 # Playbook has no tags currently but will look to add something like: 4 tags, 'build_only', 'build_and_run', 'run_only' and 'stop'
 
   roles:
-    - role: concierge-app
+    - role: .
+    - role: create-concierge-app
     - role: create-concierge-image
-    - role: concierge-tests
-
+    - role: create-concierge-tests

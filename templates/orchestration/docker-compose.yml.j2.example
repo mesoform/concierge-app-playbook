@@ -1,0 +1,25 @@
+# services is a version 2 only feature
+version: '2'
+
+services:
+  server:
+    image: "{{ img_name }}:{{ img_ver }}"
+    domainname: "{{ dns_domain }}"
+    labels:
+      - triton.cns.services=consul
+    restart: always
+    mem_limit: {{ resources }}
+    env_file:
+      - _env
+    network_mode: {{ net_mode }}
+    command: >
+      /usr/local/bin/consul agent -server
+        -bootstrap-expect 1
+        -config-dir=/etc/{{ project_name }}
+        -ui-dir /ui
+{% if ports is defined %}
+    ports:
+{% for port in ports %}
+      - {{ port }}
+{% endfor %}
+{% endif %}
