@@ -4,6 +4,12 @@
 
 # Playbook has no tags currently but will look to add something like: 4 tags, 'build_only', 'build_and_run', 'run_only' and 'stop'
 
+  pre_tasks:
+    - name: stashing any local changes to common roles
+      command: git submodule foreach 'git stash'
+    - name: update common roles
+      command: git submodule update --remote --recursive
+
   roles:
     - role: .
     - role: create-concierge-app
