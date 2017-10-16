@@ -1,3 +1,0 @@
-# Consul bootstrap via Triton CNS
-CONSUL=consul.svc.f045e9bf-056c-68fa-f340-f78dd0141896.eu-ams-1.cns.joyent.com
-LOG_LEVEL=debug

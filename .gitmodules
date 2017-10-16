@@ -1,9 +1,9 @@
 [submodule "create-concierge-app"]
 	path = create-concierge-app
-	url = https://gbmeuk@bitbucket.org/mesoform/create-concierge-app.git
+	url = https://github.com/mesoform/create-concierge-app.git
 [submodule "create-concierge-image"]
 	path = create-concierge-image
-	url = https://gbmeuk@bitbucket.org/mesoform/create-concierge-image.git
+	url = https://github.com/mesoform/create-concierge-image.git
 [submodule "create-concierge-tests"]
 	path = create-concierge-tests
-	url = https://gbmeuk@bitbucket.org/mesoform/create-concierge-tests.git
+	url = https://github.com/mesoform/create-concierge-tests.git
