@@ -39,6 +39,9 @@ with roles_path set
 
 ### Pull roles
 git clone the following repositories
+mesoform/create-concierge-app  
+mesoform/create-concierge-image  
+mesoform/create-concierge-tests  
 
 ### copy the app.yml playbook into your top-level playbook directory
 
