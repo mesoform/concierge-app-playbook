@@ -38,7 +38,7 @@ stuff
 with roles_path set
 
 ### Pull roles
-git clone the following repositories
+git clone the following repositories  
 mesoform/create-concierge-app  
 mesoform/create-concierge-image  
 mesoform/create-concierge-tests  
