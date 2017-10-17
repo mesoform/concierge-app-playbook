@@ -1,31 +1,26 @@
 ---
 #  project_src: inline_docker_service_module
-  docker_host: dockerapi-private-lab1.mesoform.com
-  project_name: consul
-  company: mesoform
-  company_domain: com
-  dept: oaas
-  brand: dockerlx
+  docker_host: CHANGE_ME
+  project_name: CHANGE_ME
+  company: CHANGE_ME
+  company_domain: CHANGE_ME
+  dept: CHANGE_ME
+  brand: CHANGE_ME
   dns_domain: "{{ project_name }}.{{ brand }}.{{ dept }}.{{ company }}.{{ company_domain }}"
-  oaas_domain: svc.gaz.GB-Home.cns.gorillass.co.uk
-  consul_as_agent: false
-  consul_version: 0.8.5
-  consul_checksum: 35dc317c80862c306ea5b1d9bc93709483287f992fd0797d214d1cc1848e7b62
-  consul_ui_checksum: 4f7b90d8159480daeff6f3673f56fc75c00e4fd05de9c5c6d22a4af2fbc78368
+  oaas_domain: CHANGE_ME
+  consul_as_agent: CHANGE_ME
   service_tags:
-    - service
-    - discovery
-    - consul
-  img_ver: 0.1.6
-  img_maintainer: Gareth Brown <gareth@mesoform.com>
-  img_description: "Concierge maintained Consul Key Value Store Service Discovery and Dynamic Configuration for Mesoform"
-  healthcheck: '["/usr/local/bin/consul-manage", "health"]'
-  preStartfunc: '["/usr/local/bin/consul-manage", "preStart"]'
-  install_script: /usr/local/bin/install.sh
+    - CHANGE_ME
+  img_ver: CHANGE_ME
+  img_maintainer: CHANGE_ME <CHANGE@ME>
+  img_description: "CHANGE_ME"
+  healthcheck: '["CHANGE_ME, "health"]'
+  preStartfunc: '["CHANGE_ME", "preStart"]'
+  install_script: CHANGE_ME
   volumes:
-    -
+    - CHANGE_ME
   ports:
-    -
+    - CHANGE_ME
   build_args:
-    -
+    - CHANGE_ME
 
