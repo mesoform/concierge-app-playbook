@@ -29,6 +29,12 @@ Currently these are as follows:
 * Options like mem_limit are best added to compose files but other options may be added at a later date
 
 ## Setting up
+### Clone the repository
+```
+mkdir my-app-name
+cd my-app-name
+git clone https://github.com/mesoform/configure-concierge-app.git .
+```
 ### Set Docker environment variables to Docker socket
 stuff
 
