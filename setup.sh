@@ -2,8 +2,8 @@
 
 # Initialise Git
 echo -e "Initialising Git"
-rm -Rf .git
-git init
+#rm -Rf .git
+#git init
 
 
 # after initialising git, set any necessary basic variables
@@ -24,19 +24,21 @@ fi
 
 # set basic vars
 #for var in $(awk '/SETUP_ENV/' vars/main.yml); do
-while read -r line; do
-  var=$(echo ${line} | grep SETUP_ENV vars/main.yml)
-  DESC=$(echo ${var} | awk -F\# '{sub(/^[ \t]+/, ""); print $2}')
-  KEY=$(echo ${var} | awk -F: '{sub(/^[ \t]+/, ""); print $1}')
-  echo "set ${KEY} (${DESC}):"
-  read -p ">" VAL
-  [ ${KEY} == "project_name" ] && CONCIERGE_PROJECT=${VAL}
-  sed "s|  ${KEY}: SETUP_ENV.*|  ${KEY}: ${VAL} #${DESC}|" vars/main.yml
-done
+while read -r -u9 line; do
+  (
+    DESC=$(echo ${line} | awk -F\# '{sub(/^[ \t]+/, ""); print $2}')
+    KEY=$(echo ${line} | awk -F: '{sub(/^[ \t]+/, ""); print $1}')
+    echo "set ${KEY} (${DESC}):"
+    read -p ">" VAL
+    sed -i -e "s|  ${KEY}: SETUP_ENV.*|  ${KEY}: ${VAL} #${DESC}|" vars/main.yml
+    # set ansible roles_path
+    [[ ${KEY} == "project_name" ]] \
+        && echo "appending local directory to roles_path" \
+        && sed -i -e "s|roles_path = /etc/ansible/roles/CONCIERGE_PROJECT|roles_path = ${ANSIBLE_HOME}/roles/${VAL}|" ./ansible.cfg
+   )
+done 9< <(grep SETUP_ENV vars/main.yml)
 
 
-# set ansible roles_path
-sed "s|roles_path = /etc/ansible/roles/CONCIERGE_PROJECT|roles_path = /etc/ansible/roles/${CONCIERGE_PROJECT}|" ansible.cfg
 
 # verify success
 
