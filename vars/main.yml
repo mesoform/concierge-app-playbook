@@ -23,4 +23,6 @@
     - CHANGE_ME
   build_args:
     - CHANGE_ME
+  env_vars:
+    - CHANGE_ME
 
