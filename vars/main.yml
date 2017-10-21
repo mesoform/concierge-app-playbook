@@ -16,7 +16,7 @@
   img_description: "CHANGE_ME"
   healthcheck: '["CHANGE_ME, "health"]'
   preStartfunc: '["CHANGE_ME", "preStart"]'
-  install_script: CHANGE_ME
+  install_script: /usr/local/bin/install.sh # install script found in files/bin
   volumes:
     - CHANGE_ME
   ports:
