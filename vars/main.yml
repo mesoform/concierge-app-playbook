@@ -8,7 +8,7 @@
   os_distro: SETUP_ENV # what flavour of operating system. Current options are alpine and debian
   dns_domain: "{{ project_name }}.{{ dept }}.{{ company }}.{{ company_domain }}"
   oaas_domain: SETUP_ENV
-  consul_as_agent: SETUP_ENV
+  consul_as_agent: SETUP_ENV # For service discovery, Containerpilot can connect to the Consul API but it is recommended to leave this true and use an agent
   service_tags:
     - CHANGE_ME
   img_ver: CHANGE_ME
