@@ -42,6 +42,10 @@ while read -r -u9 line; do
    )
 done 9< <(grep SETUP_ENV vars/main.yml)
 
+echo "blanking README"
+mv README.md README-Concierge.md
+touch README.md
+
 # remove tmp files
 echo -e "tidying up..."
 [[ -e ansible.cfg.swp ]] && rm ansible.cfg.swp
@@ -49,10 +53,5 @@ echo -e "tidying up..."
 
 # verify success
 
-
-
-
-
-# verify success
 
 
