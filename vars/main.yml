@@ -1,7 +1,7 @@
 ---
 #  project_src: inline_docker_service_module
   docker_host: SETUP_ENV # This is the URL for the Docker API
-  project_name: SETUP_ENV # The name of the application being built into a Docker image
+  project_name: SETUP_ENV # The name of the application being built into a Docker image. If you change this, you must correct roles_path in ansible.cfg.
   company: SETUP_ENV # Your URL compliant company name
   company_domain: SETUP_ENV # the company (g)TLD for this software. E.g. co.uk or com
   dept: SETUP_ENV
