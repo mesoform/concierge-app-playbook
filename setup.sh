@@ -3,6 +3,7 @@
 PARAM=$1
 
 if [ "${PARAM}" == "--initialise-git" ]; then
+    GIT_INITIALISATION=TRUE
     # Initialise Git
     echo -e "Initialising Git"
     rm -Rf .git
@@ -71,13 +72,37 @@ done 9< <(grep SETUP_ENV vars/main.yml)
 if [[ ! -e README-Concierge.md ]]; then
     echo "blanking README"
     mv README.md README-Concierge.md
-    touch README.md
+    echo "# New Concierge Project Playbook" > README.md
 fi
 
 # remove tmp files
 echo -e "tidying up..."
 [[ -e ansible.cfg.swp ]] && rm ansible.cfg.swp
 [[ -e vars/main.yml.swp ]] && rm vars/main.yml.swp
+
+# if this we're initialising git, do an initial commit
+if [[ -n ${GIT_INITIALISATION} ]]; then
+    DO_COMMIT=y
+    read -e -p "Do an initial commit (Y/n): " COMMIT
+    COMMIT="${COMMIT:-${DO_COMMIT}}"
+    COMMIT=$(echo ${COMMIT}| tr '[:upper:]' '[:lower:]')
+    while [ ${COMMIT} != y ] && [ ${COMMIT} != n ]; do
+        echo "Enter y or n"
+        read -e -p "Do an initial commit (Y/n): " COMMIT
+        COMMIT="${COMMIT:-${DO_COMMIT}}"
+        COMMIT=$(echo ${COMMIT} | tr '[:upper:]' '[:lower:]')
+    done
+    if [[ ${COMMIT} == y ]]; then
+        echo "adding files"
+       git add .
+       echo "committing"
+       git commit -am "Initial Commit"
+       echo "pushing"
+       git push --set-upstream origin master
+    elif [[ ${COMMIT} == n ]]; then
+        exit 0
+    fi
+fi
 
 # verify success
 
