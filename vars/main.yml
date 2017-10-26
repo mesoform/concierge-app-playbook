@@ -5,8 +5,8 @@
   company: SETUP_ENV # Your URL compliant company name
   company_domain: SETUP_ENV # the company (g)TLD for this software. E.g. co.uk or com
   dept: SETUP_ENV
-  brand: SETUP_ENV
-  dns_domain: "{{ project_name }}.{{ brand }}.{{ dept }}.{{ company }}.{{ company_domain }}"
+  os_distro: SETUP_ENV # what flavour of operating system. Current options are alpine and debian
+  dns_domain: "{{ project_name }}.{{ dept }}.{{ company }}.{{ company_domain }}"
   oaas_domain: SETUP_ENV
   consul_as_agent: SETUP_ENV
   service_tags:
