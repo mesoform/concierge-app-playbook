@@ -7,6 +7,10 @@ if [ "${PARAM}" == "--initialise-git" ]; then
     echo -e "Initialising Git"
     rm -Rf .git
     git init
+    echo "Adding submodules"
+    git submodule add https://github.com/mesoform/create-concierge-app.git
+    git submodule add https://github.com/mesoform/create-concierge-image.git
+    git submodule add https://github.com/mesoform/create-concierge-tests.git
 fi
 
 
