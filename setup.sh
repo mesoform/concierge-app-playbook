@@ -8,6 +8,15 @@ if [ "${PARAM}" == "--initialise-git" ]; then
     rm -Rf .git
     git init
     echo "Adding submodules"
+    for dir in $(ls -d create-concierge-* ); do
+        if [ "$(ls -A ${dir} )" ]; then
+            echo "${dir} submodule already setup"
+        else
+            echo "Empty submodule directory exists. Resetting"
+            rmdir ${dir}
+        fi
+    done
+    echo "Syncing submodules"
     git submodule add https://github.com/mesoform/create-concierge-app.git
     git submodule add https://github.com/mesoform/create-concierge-image.git
     git submodule add https://github.com/mesoform/create-concierge-tests.git
@@ -46,9 +55,11 @@ while read -r -u9 line; do
    )
 done 9< <(grep SETUP_ENV vars/main.yml)
 
-echo "blanking README"
-mv README.md README-Concierge.md
-touch README.md
+if [[ ! -e README-Concierge.md ]]; then
+    echo "blanking README"
+    mv README.md README-Concierge.md
+    touch README.md
+fi
 
 # remove tmp files
 echo -e "tidying up..."
@@ -56,6 +67,5 @@ echo -e "tidying up..."
 [[ -e vars/main.yml.swp ]] && rm vars/main.yml.swp
 
 # verify success
-
 
 
