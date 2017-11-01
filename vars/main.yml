@@ -15,7 +15,7 @@
   img_maintainer: SETUP_ENV # In the format of FIRSTNAME SURNAME <localpart@domainpart>
   img_description: "CHANGE_ME"
   healthcheck: '["CHANGE_ME, "health"]'
-  preStartfunc: '["CHANGE_ME", "preStart"]'
+  pre_start: '["CHANGE_ME", "preStart"]'
   install_script: /usr/local/bin/install.sh # install script found in files/bin
   volumes:
     - CHANGE_ME
