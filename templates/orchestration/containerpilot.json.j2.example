@@ -1,6 +1,6 @@
 {
   "consul": {% raw %}"{{ if .CONSUL_AGENT }}localhost{{ else }}{{ if .CONSUL }}{{ .CONSUL }}{{ else }}consul{{ end }}{{ end }}:8500"{% endraw %},
-  "preStart": {{ preStartfunc }},
+  "preStart": {{ pre_start }},
   "preStop": ["consul", "leave"],
   "postStop": ["zabbix_sender",
     "-c", "/etc/coprocesses/zabbix/zabbix_agentd.conf",
