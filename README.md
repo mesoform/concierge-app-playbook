@@ -27,6 +27,7 @@ Currently these are as follows:
 * entrypoint (string) = process or script to run as ENTRYPOINT. For the concierge containers, it is assumed that unless you're creating a base image, this will always be containerpilot and already set in the base image
 * command (string) = process or script to run as CMD. For the concierge containers, it is assumed that generally this will be passed via orchestration files like docker-compose.yml
 * Options like mem_limit are best added to compose files but other options may be added at a later date
+* custom_orchestration_dir = the location where you want your custom orchestration config template to output to. Defaults to the playbook root
 
 ## Setting up
 ### Clone the repository
