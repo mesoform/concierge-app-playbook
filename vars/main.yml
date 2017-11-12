@@ -16,7 +16,8 @@
   img_description: "CHANGE_ME"
   healthcheck: '["CHANGE_ME, "health"]'
   pre_start: '["CHANGE_ME", "preStart"]'
-  install_script: /usr/local/bin/install.sh # install script found in files/bin
+  install_scripts: 
+    - /usr/local/bin/install.sh # install script found in files/bin. Use multiple scripts for different image layers
   volumes:
     - CHANGE_ME
   ports:
