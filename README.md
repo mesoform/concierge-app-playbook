@@ -60,3 +60,7 @@ mesoform/create-concierge-tests
 {{ playbook_dir }}/templates/orchestration  
 {{ playbook_dir }}/vars  
 {{ playbook_dir }}/README.MD  
+
+### Once finished
+Simply run:
+```docker-compose up```
