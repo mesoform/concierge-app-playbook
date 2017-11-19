@@ -1,29 +1,23 @@
 ---
-#  project_src: inline_docker_service_module
-  docker_host: SETUP_ENV # This is the URL for the Docker API
-  project_name: SETUP_ENV # The name of the application being built into a Docker image. If you change this, you must correct roles_path in ansible.cfg.
-  company: SETUP_ENV # Your URL compliant company name
-  company_domain: SETUP_ENV # the company (g)TLD for this software. E.g. co.uk or com
-  dept: SETUP_ENV
-  os_distro: SETUP_ENV # what flavour of operating system. Current options are alpine and debian
-  dns_domain: "{{ project_name }}.{{ dept }}.{{ company }}.{{ company_domain }}"
-  oaas_domain: SETUP_ENV
-  consul_as_agent: SETUP_ENV # For service discovery, Containerpilot can connect to the Consul API but it is recommended to leave this true and use an agent
-  service_tags:
-    - CHANGE_ME
-  img_ver: CHANGE_ME
-  img_maintainer: SETUP_ENV # In the format of FIRSTNAME SURNAME <localpart@domainpart>
-  img_description: "CHANGE_ME"
-  healthcheck: '["CHANGE_ME, "health"]'
-  pre_start: '["CHANGE_ME", "preStart"]'
-  install_scripts: 
-    - /usr/local/bin/install.sh # install script found in files/bin. Use multiple scripts for different image layers
-  volumes:
-    - CHANGE_ME
-  ports:
-    - CHANGE_ME
-  build_args:
-    - CHANGE_ME
-  env_vars:
-    - CHANGE_ME
-
+service_tags:
+  - CHANGE_ME # list of tags you want to use to register with your application in the service discovery service. REQUIRED
+img_ver: CHANGE_ME # current version of your Docker image. REQUIRED
+healthcheck: 'CHANGE_ME' # the command which can be used to make sure the application is running correctly. REQUIRED
+healthcheck_interval: CHANGE_ME # how often to run the healthcheck. Default = 5s
+healthcheck_ttl: CHANGE_ME # how long successful healthchecks are valid for. This needs to be larger than the interval to prevent race conditions. Default = 15s
+healthcheck_timeout: CHANGE_ME # how long to allow the healthcheck to run before killing it. Default = 1s
+pre_start: 'CHANGE_ME' # the command/script used if anything needs to happen before our application starts. Delete if redundant
+command: CHANGE_ME # the command to start the application. REQUIRED
+install_scripts:
+  - /usr/local/bin/install.sh # install script found in files/bin. Use multiple scripts as a list for different image layers. REQUIRED
+volumes:
+  - CHANGE_ME # any persistent volumes. Delete if redundant
+service_port: CHANGE_ME # main service port of the application which will be published to the service discovery system for downstream clients. Delete if redundant
+ports:
+  - CHANGE_ME # additional application ports which the application needs opening up. Delete if redundant
+build_args:
+  - CHANGE_ME # Variables only needed for the container build. Delete if redundant
+container_vars:
+  - CHANGE_ME # environment variables you want built into your container image. Delete if redundant
+env_vars:
+  - CHANGE_ME # environment variables you want passed to the container at runtime. Delete if redundant

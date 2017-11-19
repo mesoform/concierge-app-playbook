@@ -1,0 +1,14 @@
+---
+docker_host: SETUP_ENV # This is the URL for the Docker API
+project_name: SETUP_ENV # The name of the application being built into a Docker image. E.g. consul If you change this, you must correct roles_path in ansible.cfg.
+company: SETUP_ENV # Your company name. E.g. mesoform
+company_domain: SETUP_ENV # the company (g)TLD for this software. E.g. mesoform-services.com
+dept: SETUP_ENV # department/subdomain for the software. E.g. consul.DISCOVERY.mesoform-services.com
+os_distro: SETUP_ENV # what flavour of operating system. Current options are alpine and debian
+dns_domain: "{{ project_name }}.{{ dept }}.{{ company_domain }}"
+oaas_domain: SETUP_ENV # if we have a different DNS domain for our operational services. E.g. svc.ops.mesoform-services.com
+event_management: SETUP_ENV # address of server for handling our event management and monitoring. E.g. zabbix-server.svc.ops.mesoform-services.com
+svc_discovery: SETUP_ENV # address of server for service discovery. E.g. consul.svc.ops.mesoform-services.com
+consul_as_agent: SETUP_ENV # For service discovery, Containerpilot can connect to the Consul API but it is recommended to leave this true and use an agent
+img_maintainer: SETUP_ENV # In the format of FIRSTNAME SURNAME <localpart@domainpart>
+img_description: SETUP_ENV # describe your application

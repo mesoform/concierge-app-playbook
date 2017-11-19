@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
 PARAM=$1
+CONFIG_FILE=./ansible.cfg
+DEFAULTS_FILE=defaults/main.yml
 
 if [ "${PARAM}" == "--initialise-git" ]; then
     GIT_INITIALISATION=TRUE
@@ -53,7 +55,7 @@ while read -r -u9 line; do
             VAL="${VAL:-${DEFAULT_PROJECT_NAME}}"
             # set Ansible roles_path
             echo "appending local directory to roles_path"
-            sed -i .swp -e "s|roles_path = CONCIERGE_PROJECT|roles_path = ${ANSIBLE_HOME}/roles/${VAL}|" ./ansible.cfg
+            sed -i .swp -e "s|roles_path = CONCIERGE_PROJECT|roles_path = ${ANSIBLE_HOME}/roles/${VAL}|" ${CONFIG_FILE}
         elif [[ ${KEY} == "consul_as_agent" ]]; then
             read -e -p "Enter value for ${KEY} (${DESC} DEFAULT=${DEFAULT_CONSUL_AS_AGENT}): " VAL
             VAL="${VAL:-${DEFAULT_CONSUL_AS_AGENT}}"
@@ -65,9 +67,9 @@ while read -r -u9 line; do
             done
         fi
         echo "set ${KEY} = ${VAL}"
-        sed -i .swp -e "s|  ${KEY}: SETUP_ENV.*|  ${KEY}: ${VAL} # ${DESC}|" vars/main.yml
+        sed -i .swp -e "s|  ${KEY}: SETUP_ENV.*|  ${KEY}: ${VAL} # ${DESC}|" ${DEFAULTS_FILE}
    )
-done 9< <(grep SETUP_ENV vars/main.yml)
+done 9< <(grep SETUP_ENV ${DEFAULTS_FILE})
 
 if [[ ! -e README-Concierge.md ]]; then
     echo "blanking README"
@@ -77,8 +79,8 @@ fi
 
 # remove tmp files
 echo -e "tidying up..."
-[[ -e ansible.cfg.swp ]] && rm ansible.cfg.swp
-[[ -e vars/main.yml.swp ]] && rm vars/main.yml.swp
+[[ -e ${CONFIG_FILE}.swp ]] && rm ${CONFIG_FILE}.swp
+[[ -e ${DEFAULTS_FILE}.swp ]] && rm ${DEFAULTS_FILE}.swp
 
 # if this we're initialising git, do an initial commit
 if [[ -n ${GIT_INITIALISATION} ]]; then
