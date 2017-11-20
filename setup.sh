@@ -110,13 +110,16 @@ if [[ -n ${GIT_INITIALISATION} ]]; then
        echo -e "\n\n"
        echo "pushing"
        git push --set-upstream origin master
-       [[ $? -eq 0 ]] && echo -e "Done!\n" || echo -e "Something went wrong! :(\n"
+       [[ $? -eq 0 ]] && echo -e "Done!\nCheck vars/main.yml for required variables which need setting\n" \
+         || echo -e "Something went wrong! :(\n"
     elif [[ ${COMMIT} == n ]]; then
         exit 0
-        echo -e "Done!\n"
+        echo -e "\n\n"
+        echo -e "Done!\nCheck vars/main.yml for required variables which need setting\n"
     fi
 else
-    echo -e "Done!\n"
+    echo -e "\n\n"
+    echo -e "Done!\nCheck vars/main.yml for required variables which need setting\n"
 fi
 
 # verify success
