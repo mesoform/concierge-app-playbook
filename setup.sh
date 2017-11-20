@@ -74,7 +74,7 @@ while read -r -u9 line; do
             done
         fi
         echo "set ${KEY} = ${VAL}"
-        sed -i .swp -e "s|  ${KEY}: SETUP_ENV.*|  ${KEY}: ${VAL} # ${DESC}|" ${DEFAULTS_FILE}
+        sed -i .swp -e "s|.*${KEY}: SETUP_ENV.*|${KEY}: ${VAL} # ${DESC}|" ${DEFAULTS_FILE}
    )
 done 9< <(grep SETUP_ENV ${DEFAULTS_FILE})
 
