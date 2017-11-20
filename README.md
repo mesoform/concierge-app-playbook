@@ -39,28 +39,29 @@ git clone https://github.com/mesoform/configure-concierge-app.git .
 ### Set Docker environment variables to Docker socket
 stuff
 
-### Create new Ansible role directory for project
+### Run the setup script to set up the playbook for your application
+```
+setup.sh  --initialise-git
+```
 
-### Create ansible.cfg file in this directory 
-with roles_path set
-
-### Pull roles
-git clone the following repositories  
-mesoform/create-concierge-app  
-mesoform/create-concierge-image  
-mesoform/create-concierge-tests  
-
-### copy the app.yml playbook into your top-level playbook directory
-
-### create local structure for custom build
+### Add custom files to the right directories
 {{ playbook_dir }}/files/bin  
 {{ playbook_dir }}/files/etc  
 {{ playbook_dir }}/files/test  
 {{ playbook_dir }}/templates/app  
 {{ playbook_dir }}/templates/orchestration  
 {{ playbook_dir }}/vars  
-{{ playbook_dir }}/README.MD  
+
+### Configure any variables you need
+
+### Run the playbook
+```
+ansible-playbook -v app.yml
+```
 
 ### Once finished
 Simply run:
 ```docker-compose up```
+
+### Update your documentation
+{{ playbook_dir }}/README.MD
