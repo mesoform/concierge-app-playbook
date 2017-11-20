@@ -41,7 +41,7 @@ stuff
 
 ### Run the setup script to set up the playbook for your application
 ```
-setup.sh  --initialise-git
+./setup.sh  --initialise-git
 ```
 
 ### Add custom files to the right directories
