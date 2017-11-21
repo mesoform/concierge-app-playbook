@@ -36,6 +36,12 @@ mkdir my-app-name
 cd my-app-name
 git clone https://github.com/mesoform/configure-concierge-app.git .
 ```
+
+### Submodules
+within this playbook there are some additional roles included as git submodules. These are syncroised with their upstream repositories everytime you run the playbook and any changes you made locally will be stashed.
+
+If you want to run the playbook without doing this, either remove the relevant entry from .gitmodules or run with `--skip-tags=update_submodules`
+
 ### Set Docker environment variables to Docker socket
 stuff
 
