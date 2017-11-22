@@ -55,12 +55,15 @@ stuff
 ### Add custom files to the right directories
 {{ playbook_dir }}/files/bin  
 {{ playbook_dir }}/files/etc  
-{{ playbook_dir }}/files/test  
-{{ playbook_dir }}/templates/app  
-{{ playbook_dir }}/templates/orchestration  
-{{ playbook_dir }}/vars  
+{{ playbook_dir }}/files/test
+#### Custom application configuration templates
+Any Jinja2 templates added to `{{ playbook_dir }}/templates/app` with the `.j2` extension will automatically be processed and uploaded to the application configuration directory (default = /etc/{{ project_name }})
+#### Custom application orchestration templates
+Any Jinja2 templates added to `{{ playbook_dir }}/templates/orchestration` with the `.j2` extension will automatically be processed and uploaded to the application orchestration directory (default = /etc)
+
 
 ### Configure any variables you need
+{{ playbook_dir }}/vars  
 
 ### Run the playbook
 ```
