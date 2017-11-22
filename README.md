@@ -32,6 +32,7 @@ Currently these are as follows:
 ## Setting up
 ### Clone the repository
 ```
+cd {{ roles_dir }}
 mkdir my-app-name
 cd my-app-name
 git clone https://github.com/mesoform/configure-concierge-app.git .
