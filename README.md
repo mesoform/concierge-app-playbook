@@ -18,6 +18,7 @@ The docker file has some default attributes set and allows for others to be incl
 
 Currently these are as follows:
 
+* os_distro (string) = the flavour of operating system. Current options are `alpine` and `debian` - versions *3.4* and *jessie*, respectively
 * install_script (string) = the location of the script required to install the application you want to package into the image
 * env_vars (list) = a list of additional environment variables. E.g. env_vars: FOO=bar
 * build_args (list) = a list of additional Docker ARG options for required variables when building
