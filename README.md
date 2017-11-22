@@ -57,9 +57,9 @@ stuff
 {{ playbook_dir }}/files/etc  
 {{ playbook_dir }}/files/test
 #### Custom application configuration templates
-Any Jinja2 templates added to `{{ playbook_dir }}/templates/app` with the `.j2` extension will automatically be processed and uploaded to the application configuration directory (default = /etc/{{ project_name }})
+Any Jinja2 templates added to `{{ playbook_dir }}/templates/app` with the `.j2` extension will automatically be processed and uploaded to the application configuration directory (default = /etc/{{ project_name }}). You can find an example of one already in the directory
 #### Custom application orchestration templates
-Any Jinja2 templates added to `{{ playbook_dir }}/templates/orchestration` with the `.j2` extension will automatically be processed and uploaded to the application orchestration directory (default = /etc)
+Any Jinja2 templates added to `{{ playbook_dir }}/templates/orchestration` with the `.j2` extension will automatically be processed and uploaded to the application orchestration directory (default = /etc). You can find an example of one already in the directory
 
 
 ### Configure any variables you need
