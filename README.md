@@ -1,10 +1,26 @@
 # Role to create a Concierge managed image 
+## Introduction
+The [Concierge Paradigm](http://www.mesoform.com/blog-listing/info/the-concierge-paradigm) is a powerful method of automating the management
+of running containers by simply using a service discovery system like Consul, and an event management system, like Zabbix. By using these, already well developed
+systems, you gain incredible control and information about the state of the system as a whole and fine-grained detail of all applications.
+
+A concierge managed application is one that fits naturally into this concierge environment and automatically registers itself for discovery,
+monitoring and scheduling.  This playbook asks only a few simple questions about your application and the environment in which you expect to 
+run it in, then spits out a Docker image at the end and performs the required system and integration tests to be Concierge managed and any
+custom tests you require for your application.
 
 
+## About this role
 
-## Using this role
+This role wraps up some other common roles for creating our Docker images ready to be used in a Concierge Paradigm environment.  The role 
+has been split into 4 parts:
+1. configure-concierge-repo: This repository. The purpose of which is to get you your own custom repository setup to start building your
+application container
+1. create-concierge-app: This submodule role takes the variables, scripts and any files needed for your application and constructs the necessary
+application configuration files (if using templates) and orchestration files for managing the lifecycle of your application.
+1. create-concierge-image: 
+1. create-concierge-tests
 
-This role wraps up some common roles for creating Docker images ready to be used in a Concierge Paradigm environment
 
 If ran manually, there is a concierge-image.yml file which can be passed to ansible-playbook but many of the required variables 
 and files will need to be set up locally.
@@ -19,7 +35,7 @@ The docker file has some default attributes set and allows for others to be incl
 Currently these are as follows:
 
 * os_distro (string) = the flavour of operating system. Current options are `alpine` and `debian` - versions *3.4* and *jessie*, respectively
-* install_script (string) = the location of the script required to install the application you want to package into the image
+* install_scripts (list) = the location of the script or scripts to install the application you want to package into the image. A list is used so as to logically separate different install steps into separate RUN commands and better make use of UnionFS image layers
 * env_vars (list) = a list of additional environment variables. E.g. env_vars: FOO=bar
 * build_args (list) = a list of additional Docker ARG options for required variables when building
 * labels (list) = a list of additional labels to add to the container 
