@@ -61,11 +61,14 @@ mkdir my-app-name # Only use hyphens, not underscores because this is used as th
 cd my-app-name
 git clone https://github.com/mesoform/configure-concierge-app.git .
 ```
-
+### create your project repository 
+In Github, Bitbucket or whatever system you like and copy the URL to your clipboard because you'll need it when you...
 ### Run the setup script to set up the playbook for your application
 ```
 ./setup.sh  --initialise-git
 ```
+
+This will initialise and pull down the submodules, set some defaults for your project and perform an initial commit.
 
 ### Add custom files to the right directories
 #### Custom application scripts
