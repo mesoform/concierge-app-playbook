@@ -75,15 +75,18 @@ This will initialise and pull down the submodules, set some defaults for your pr
 Any scripts to be used as part of your application deployment can be added to `{{ playbook_dir }}/files/bin` and will be automatically copied
 to `/usr/local/bin` on the container. You can find an example scripts already in this directory.
 #### Custom application configuration
-Simply drop any custom application configuration into the `{{ playbook_dir }}/files/etc` directory to have it uploaded to the application 
+Simply drop any custom application configuration into the `{{ playbook_dir }}/files/etc/{{ project_name}}` directory to have it uploaded to the application 
 configuration directory (default = /etc/{{ project_name }}).
-{{ playbook_dir }}/files/test
+#### custom application tests 
+_Not implemented but this will be where to manually add or templates will be copied to for tests. These will be copied to /tmp in the container_
 #### Custom application configuration templates
-Any Jinja2 templates added to `{{ playbook_dir }}/templates/app` with the `.j2` extension will automatically be processed and uploaded 
+Any Jinja2 templates added to `{{ playbook_dir }}/templates/app` with the `.j2` extension will automatically be processed and copied to files/etc/{{ project_name}} where they will be uploaded 
 to the application configuration directory (default = /etc/{{ project_name }}). You can find an example of one already in the directory
 #### Custom application orchestration templates
 Any Jinja2 templates added to `{{ playbook_dir }}/templates/orchestration` with the `.j2` extension will automatically be processed and
-uploaded to the application orchestration directory (default = /etc). You can find an example of one already in the directory
+Copied to files/etc where they will be uploaded to the application orchestration directory (default = /etc). You can find an example of one already in the directory
+#### Custom application test templates
+_Not implemented Any Jinja2 templates added to `{{ playbook__dir }}/templates/orchestration` with the `.j2` extension will automatically be processed and uploaded to the application orchestration directory (default = /etc). You can find an example of one already in the directory_
 
 
 ### Configure any variables you need
