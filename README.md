@@ -44,16 +44,7 @@ orchestration files like docker-compose.yml
 * Options like mem_limit are best added to compose files but other options may be added at a later date
 * See vars/main.yml and defaults/main.yml for others variables and their descriptions
 
-## Setting up
-### Clone the repository
-```
-cd {{ roles_dir }}
-mkdir my-app-name
-cd my-app-name
-git clone https://github.com/mesoform/configure-concierge-app.git .
-```
-
-### Submodules
+## Submodules
 Within this playbook there are some additional roles included as git submodules. These modules are synchronised with their upstream 
 repositories every time you run the playbook and any changes you made locally will be stashed. Every effort is made to make these submodule
 roles backward compatible but sometimes things accidents happen and sometimes its just not feasible. We've added some output messages to indicate
@@ -61,8 +52,15 @@ roles backward compatible but sometimes things accidents happen and sometimes it
 
 If you want to run the playbook without doing this, either remove the relevant entry from .gitmodules or run with `--skip-tags=update_submodules`
 
-### Set Docker environment variables to Docker socket
-TBD
+
+## Setting up
+### Clone the repository
+```
+cd {{ roles_dir }}
+mkdir my-app-name # Only use hyphens, not underscores because this is used as the service name registered in Consul
+cd my-app-name
+git clone https://github.com/mesoform/configure-concierge-app.git .
+```
 
 ### Run the setup script to set up the playbook for your application
 ```
@@ -70,8 +68,12 @@ TBD
 ```
 
 ### Add custom files to the right directories
-{{ playbook_dir }}/files/bin  
-{{ playbook_dir }}/files/etc  
+#### Custom application scripts
+Any scripts to be used as part of your application deployment can be added to `{{ playbook_dir }}/files/bin` and will be automatically copied
+to `/usr/local/bin` on the container. You can find an example scripts already in this directory.
+#### Custom application configuration
+Simply drop any custom application configuration into the `{{ playbook_dir }}/files/etc` directory to have it uploaded to the application 
+configuration directory (default = /etc/{{ project_name }}).
 {{ playbook_dir }}/files/test
 #### Custom application configuration templates
 Any Jinja2 templates added to `{{ playbook_dir }}/templates/app` with the `.j2` extension will automatically be processed and uploaded 
@@ -105,6 +107,8 @@ container. It is recommended that you use these but if you want to manage your o
  [Dockerfile for one of the images](https://hub.docker.com/r/mesoform/concierge-debian-base-image/~/dockerfile/) and then specify your new image by
   setting the `base_image_name: your-image-repo:your-image-version` key in your variables file. Otherwise, leave this unset and just change
    `os_distro` to pick up the latest stable version of that flavour.
+### Install Scripts
+   
 
 
 ## Testing
