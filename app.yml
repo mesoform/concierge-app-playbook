@@ -5,43 +5,46 @@
 # Playbook has no tags currently but will look to add something like: 4 tags, 'build_only', 'build_and_run', 'run_only' and 'stop'
 
   pre_tasks:
-    - name: check if submodules are checked-out locally
-      find:
-        paths:
-          - create-concierge-app/
-          - create-concierge-image/
-          - create-concierge-tests/
-        file_type: any
-      register: submodules_locally
+    - block:
+      - name: check if submodules are checked-out locally
+        find:
+          paths:
+            - create-concierge-app/
+            - create-concierge-image/
+            - create-concierge-tests/
+          file_type: any
+        register: submodules_locally
 
-    - name: add common roles
-      shell: git submodule init && git submodule update --recursive
-      register: submodule_add
-      changed_when: "'checked out' in submodule_add.stdout"
-      when: submodules_locally.examined == 0
+      - name: add common roles
+        shell: git submodule init && git submodule update --recursive
+        register: submodule_add
+        changed_when: "'checked out' in submodule_add.stdout"
+        when: submodules_locally.examined == 0
 
-    - name: stashing any local changes to common roles
-      command: git submodule foreach 'git stash'
-      register: submodule_stash
-      changed_when: "'No local changes' not in submodule_stash.stdout"
-      when: submodules_locally.examined > 0
+      - name: stashing any local changes to common roles
+        command: git submodule foreach 'git stash'
+        register: submodule_stash
+        changed_when: "'No local changes' not in submodule_stash.stdout"
+        when: submodules_locally.examined > 0
 
-    - name: update common roles
-      command: git submodule update --remote --recursive
-      register: submodule_update
-      changed_when: "'checked out' in submodule_update.stdout"
-      when: submodules_locally.examined > 0
+      - name: update common roles
+        command: git submodule update --remote --recursive
+        register: submodule_update
+        changed_when: "'checked out' in submodule_update.stdout"
+        when: submodules_locally.examined > 0
 
-    - debug:
-        msg: "UPSTREAM SUBMODULES HAVE BEEN UPDATED. PLEASE RERUN THE PLAYBOOK TO RELOAD THEM"
-      when:
-        - submodule_update.changed
+      - debug:
+          msg: "UPSTREAM SUBMODULES HAVE BEEN UPDATED. PLEASE RERUN THE PLAYBOOK TO RELOAD THEM"
+        when:
+          - submodule_update.changed
 
-    - debug:
-        msg: "UPSTREAM SUBMODULES ADDED LOCALLY. PLEASE RERUN THE PLAYBOOK TO RELOAD THEM"
-      when:
-        - submodule_add is defined
-        - submodule_add.changed
+      - debug:
+          msg: "UPSTREAM SUBMODULES ADDED LOCALLY. PLEASE RERUN THE PLAYBOOK TO RELOAD THEM"
+        when:
+          - submodule_add is defined
+          - submodule_add.changed
+      tags:
+        - update_submodules
 
   roles:
     - role: .

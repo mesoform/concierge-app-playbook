@@ -52,6 +52,9 @@ roles backward compatible but sometimes things accidents happen and sometimes it
 
 If you want to run the playbook without doing this, either remove the relevant entry from .gitmodules or run with `--skip-tags=update_submodules`
 
+## Service discovery
+
+## Event management
 
 ## Setting up
 ### Clone the repository
@@ -86,16 +89,17 @@ to the application configuration directory (default = /etc/{{ project_name }}). 
 Any Jinja2 templates added to `{{ playbook_dir }}/templates/orchestration` with the `.j2` extension will automatically be processed and
 Copied to files/etc where they will be uploaded to the application orchestration directory (default = /etc). You can find an example of one already in the directory
 #### Custom application test templates
-_Not implemented Any Jinja2 templates added to `{{ playbook__dir }}/templates/orchestration` with the `.j2` extension will automatically be processed and uploaded to the application orchestration directory (default = /etc). You can find an example of one already in the directory_
+_Not implemented Any Jinja2 templates added to `{{ playbook__dir }}/templates/tests` with the `.j2` extension will automatically be processed and uploaded to the application orchestration directory (default = /etc). You can find an example of one already in the directory_
 
 
 ### Configure any variables you need
 {{ playbook_dir }}/vars  
 
 ### Run the playbook
-```
-ansible-playbook -v app.yml
-```
+Run the playbook: `ansible-playbook -v app.yml`
+List all of the playbook tags: `ansible-playbook --list-tags app.yml`
+Skip updating the upstream submodules: `ansible-playbook -v --skip-tags=update_submodules app.yml`
+View all the tasks: `ansible-playbook --list-tasks app.yml`
 
 ### Once finished
 Simply run:
@@ -117,10 +121,19 @@ container. It is recommended that you use these but if you want to manage your o
    
 
 
-## Testing
+## Testing (WIP)
 Some tests are included as part of the playbook and we’ve also included a simple, plugin-like function for including your own. The details of which area covered below.
-### System tests 
-_not implemented - as a basis set of checks, the testing role will assert that the following jobs are running:_
-* Consul agent (only if svc_discovery is defined)
-* Zabbix agent (only if event_management is defined)
+### Standard system tests (not implemented)
+not implemented - as a basic set of checks, the testing role will assert that the following jobs are running:
+* Consul agent (only if `svc_discovery` is defined)
+* Zabbix agent (only if `event_management` is defined)
 * your project's main application job
+#### Standard Integration tests
+Basic integration tests will also be performed if you have at least one of `svc_discovery` or `event_management` are defined.
+* `svc_discovery` being set will automatically spin up a Consul server in the same network as your application. You can check that the service has registerd
+by connecting to the Consul UI on port 8500 (or whatever Docker mapped it to)
+* `event_management` being set will automatically spin up a Zabbix server in the same network as your application. You can check that the service has registerd
+by connecting to the Zabbix UI on port 80 (or whatever Docker mapped it to)
+#### User-defined tests (WIP)
+Soon we will implement a method of dropping in test files or templates into the relevant tests directory and have it processed. Running an integration system
+will simply be a case of providing the required Docker compose file/template. 
