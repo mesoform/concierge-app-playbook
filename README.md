@@ -118,5 +118,9 @@ container. It is recommended that you use these but if you want to manage your o
 
 
 ## Testing
-If ran manually, there is a concierge-image.yml file which can be passed to ansible-playbook but many of the required variables 
-and files will need to be set up locally.
+Some tests are included as part of the playbook and we’ve also included a simple, plugin-like function for including your own. The details of which area covered below.
+### System tests 
+_not implemented - as a basis set of checks, the testing role will assert that the following jobs are running:_
+* Consul agent (only if svc_discovery is defined)
+* Zabbix agent (only if event_management is defined)
+* your project's main application job
