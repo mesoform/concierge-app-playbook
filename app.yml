@@ -2,8 +2,6 @@
 - hosts: docker1
   gather_facts: yes
 
-# Playbook has no tags currently but will look to add something like: 4 tags, 'build_only', 'build_and_run', 'run_only' and 'stop'
-
   pre_tasks:
     - block:
       - name: check if submodules are checked-out locally

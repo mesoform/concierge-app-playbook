@@ -1,7 +1,7 @@
 # Role to create an image for a Concierge managed application 
 ## Introduction
 The [Concierge Paradigm](http://www.mesoform.com/blog-listing/info/the-concierge-paradigm) is an extension of 
-[The Autopilot Pattern](http://autopilotpattern.io), which is a powerful method of automating the management
+[The Autopilot Pattern](http://autopilotpattern.io), and is a rich and powerful method of automating the management
 of running containers by simply using a service discovery system like Consul, and an event management system, like Zabbix. By using these, 
 already well developed systems, you gain incredible control and information about the state of the system as a whole and fine-grained detail
 of all applications.
@@ -72,12 +72,12 @@ will look for your service discovery system with the following addresses `consul
 proper integration test and see if your application registers as a service correctly. See [Standard Integration tests below](#standard-integration-tests)
 
 ## Event management
-
+_WIP_
 ## Setting up
 ### Clone the repository
 ```
 cd {{ roles_dir }}
-mkdir my-app-name # Only use hyphens, not underscores because this is used as the service name registered in Consul
+mkdir my-app-name # Only use hyphens, not underscores because this is used as the service name in our service discovery system
 cd my-app-name
 git clone https://github.com/mesoform/configure-concierge-app.git .
 ```
@@ -123,7 +123,7 @@ Simply run:
 ```docker-compose up```
 
 ### Update your documentation
-{{ playbook_dir }}/README.MD
+This README.md will be renamed to README-Concierge.md and a blank one, ready for all your fantastic documentation can be found in {{ playbook_dir }}/README.md
 
 ## Customising
 If you want to create your own templates ([Jinja2](http://jinja.pocoo.org)), there are a few template examples in the templates directory
@@ -145,13 +145,12 @@ not implemented - as a basic set of checks, the testing role will assert that th
 * Consul agent (only if `svc_discovery` is defined)
 * Zabbix agent (only if `event_management` is defined)
 * your project's main application job
-
-#### Standard Integration tests<a name="standard-integration-tests"></a>
+### Standard Integration tests<a name="standard-integration-tests"></a>
 Basic integration tests will also be performed if you have at least one of `svc_discovery` or `event_management` are defined.
 * `svc_discovery` being set will automatically spin up a Consul server in the same network as your application. You can check that the service has registerd
 by connecting to the Consul UI on port 8500 (or whatever Docker mapped it to)
 * `event_management` being set will automatically spin up a Zabbix server in the same network as your application. You can check that the service has registerd
 by connecting to the Zabbix UI on port 80 (or whatever Docker mapped it to)
-#### User-defined tests (WIP)
+### User-defined tests (WIP)
 Soon we will implement a method of dropping in test files or templates into the relevant tests directory and have it processed. Running an integration system
 will simply be a case of providing the required Docker compose file/template. 

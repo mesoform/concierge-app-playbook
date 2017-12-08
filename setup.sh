@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Setup script for a initialising our playbook to create a Concierge Managed Application
+# http://www.mesoform.com/blog-listing/info/the-concierge-paradigm
+
 PARAM=$1
 CONFIG_FILE=./ansible.cfg
 DEFAULTS_FILE=defaults/main.yml
