@@ -1,4 +1,4 @@
-# Role to create a Concierge managed image 
+# Role to create an image for a Concierge managed application 
 ## Introduction
 The [Concierge Paradigm](http://www.mesoform.com/blog-listing/info/the-concierge-paradigm) is an extension of 
 [The Autopilot Pattern](http://autopilotpattern.io), which is a powerful method of automating the management
@@ -21,7 +21,7 @@ environment.  The role has been split into 4 parts:
 application container
 1. create-concierge-app: This submodule role takes the variables, scripts and any files needed for your application and constructs the necessary
 application configuration files (if using templates) and orchestration files for managing the lifecycle of your application.
-1. create-concierge-image: Constructs our Dockerfile and builds our image.
+1. create-concierge-image: Constructs your Dockerfile and builds your image.
 1. create-concierge-tests: Performs basic system tests, integration to service discovery and event management. Plus any user-defined application tests
 
 
@@ -60,16 +60,16 @@ you also need to know is that we choose to use [active discovery](http://contain
 writing the code but also, we do genuinely believe Consul is the best product on the market for this, right now.
 
 Some other things you need to know:
-1. We've written this code in such a way as to use DNS search domains so that containers can more easily be discovery within your domains.  For example,
-if you set `dns_domain=mesoform.com`, `oaas_domain=svc.mesoform.com` and `svc_discovery=consul` then the Consul agent running in your container will 
-look for your service discovery system with the following addresses `consul`, `consul.mesoform.com` and `consul.svc.mesoform.com`.
+1. We've written this code in such a way as to use DNS search domains so that containers and services can more easily be recognised within your domains.
+For example, if you set `dns_domain=mesoform.com`, `oaas_domain=svc.mesoform.com` and `svc_discovery=consul` then the Consul agent running in your container 
+will look for your service discovery system with the following addresses `consul`, `consul.mesoform.com` and `consul.svc.mesoform.com`.
 1. Therefore, if you have a system already running and in place that is reachable on the address `service-discovery.ops.myservices.internal` you can set 
 `svc_discovery` to `service-dicovery` (as long as `dns_domain` or `oaas_domain` match `ops.myservices.internal`) or `service-discovery.ops.myservices.internal`
 1. You don't have to have a full blown discovery system running to build your application container image. If you don't set a value for `svc_discovery`,
- the the consul agent running inside the container will simply start in development mode so that even if your job is a service, it will still run.
-as expected.
+ then the consul agent running inside the container will simply start in development mode so that even if your job is a service, it will still run 
+ as expected.
 1. If you set `svc_discovery=consul`, you will also get service defined in the file docker-compose-integrations.yml. This will allow you to perform a 
-proper integration test and see if your application registers as a service correctly. See [Standard Integration tests below](####Standard Integration tests)
+proper integration test and see if your application registers as a service correctly. See [Standard Integration tests below](#standard-integration-tests)
 
 ## Event management
 
@@ -145,7 +145,8 @@ not implemented - as a basic set of checks, the testing role will assert that th
 * Consul agent (only if `svc_discovery` is defined)
 * Zabbix agent (only if `event_management` is defined)
 * your project's main application job
-#### Standard Integration tests
+
+#### Standard Integration tests<a name="standard-integration-tests"></a>
 Basic integration tests will also be performed if you have at least one of `svc_discovery` or `event_management` are defined.
 * `svc_discovery` being set will automatically spin up a Consul server in the same network as your application. You can check that the service has registerd
 by connecting to the Consul UI on port 8500 (or whatever Docker mapped it to)
