@@ -1,6 +1,7 @@
 # Role to create a Concierge managed image 
 ## Introduction
-The [Concierge Paradigm](http://www.mesoform.com/blog-listing/info/the-concierge-paradigm) is a powerful method of automating the management
+The [Concierge Paradigm](http://www.mesoform.com/blog-listing/info/the-concierge-paradigm) is an extension of 
+[The Autopilot Pattern](http://autopilotpattern.io), which is a powerful method of automating the management
 of running containers by simply using a service discovery system like Consul, and an event management system, like Zabbix. By using these, 
 already well developed systems, you gain incredible control and information about the state of the system as a whole and fine-grained detail
 of all applications.
@@ -53,6 +54,22 @@ roles backward compatible but sometimes things accidents happen and sometimes it
 If you want to run the playbook without doing this, either remove the relevant entry from .gitmodules or run with `--skip-tags=update_submodules`
 
 ## Service discovery
+Service discovery as a subject is beyond the scope of this documentation but if you're chosing to use this repository it's because you value it. What 
+you also need to know is that we choose to use [active discovery](http://containersummit.io/articles/active-vs-passive-discovery) and chose to use 
+[Consul](http://consul.io) to perform that function. We aren't opinionated about using Consul but currently this playbook is. Partly this is due to time
+writing the code but also, we do genuinely believe Consul is the best product on the market for this, right now.
+
+Some other things you need to know:
+1. We've written this code in such a way as to use DNS search domains so that containers can more easily be discovery within your domains.  For example,
+if you set `dns_domain=mesoform.com`, `oaas_domain=svc.mesoform.com` and `svc_discovery=consul` then the Consul agent running in your container will 
+look for your service discovery system with the following addresses `consul`, `consul.mesoform.com` and `consul.svc.mesoform.com`.
+1. Therefore, if you have a system already running and in place that is reachable on the address `service-discovery.ops.myservices.internal` you can set 
+`svc_discovery` to `service-dicovery` (as long as `dns_domain` or `oaas_domain` match `ops.myservices.internal`) or `service-discovery.ops.myservices.internal`
+1. You don't have to have a full blown discovery system running to build your application container image. If you don't set a value for `svc_discovery`,
+ the the consul agent running inside the container will simply start in development mode so that even if your job is a service, it will still run.
+as expected.
+1. If you set `svc_discovery=consul`, you will also get service defined in the file docker-compose-integrations.yml. This will allow you to perform a 
+proper integration test and see if your application registers as a service correctly. See [Standard Integration tests below](####Standard Integration tests)
 
 ## Event management
 
