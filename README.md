@@ -14,9 +14,10 @@ be Concierge managed and any custom tests you require for your application.
 
 ## About this role
 
-Primarily the role generates a Dockerfile, a set of Docker Compose files and a Containerpilot file. Then builds an image and runs 
-a set of tests against the build. It wraps up some other common roles for creating our Docker images ready to be used in a Concierge 
-Paradigm environment.  The role has been split into 4 parts:
+Primarily the role generates a Dockerfile, a set of Docker Compose files and a 
+[Containerpilot](https://github.com/joyent/containerpilot) file. Then builds an image and runs a set of tests against the build. It
+wraps up some other common roles for creating our Docker images ready to be used in a Concierge Paradigm environment.  The role has
+been split into 4 parts:
 1. configure-concierge-repo: This repository. The purpose of which is to get you your own custom repository setup to start building 
 your application container
 1. create-concierge-app: This submodule role takes the variables, scripts and any files needed for your application and constructs 
@@ -48,12 +49,14 @@ downstream services know which port to use when communicating with your applicat
 * volumes (list) = a list of volume the container should create
 * entrypoint (string) = process or script to run as ENTRYPOINT. For the concierge containers, it is assumed that unless you're 
 creating a base image, this will always be containerpilot and already set in the base image.
-* command (string) = process or script to run as CMD. For the concierge containers, it is assumed that generally this will be passed 
-via orchestration files like docker-compose.yml
-* custom_orchestration_dir = the location where you want your custom orchestration config template to output to. Defaults to the 
-playbook root.
-* Options like mem_limit are best added to compose files but other options may be added at a later date
-* See vars/main.yml and defaults/main.yml for others variables and their descriptions
+* command (string) = the command used to start your application. This will be executed as part of a Containerpilot job.
+* custom_orchestration_dir = the location where you want your custom application orchestration config template to output to. This is 
+not container orchestration (e.g. docker-compose.yml) but how you want to orchestrate your application (e.g. containerpilot.json). The
+default is /etc inside your container. 
+
+See vars/main.yml and defaults/main.yml for others variables and their descriptions and any non-declared container orchestration 
+options like mem_limit (defaults to 128MB)are best updated in the compose files at the end.
+
 
 ## Submodules
 Within this playbook there are some additional roles included as git submodules. These modules are synchronised with their upstream 
@@ -149,10 +152,10 @@ directory_
 {{ playbook_dir }}/vars  
 
 ### Run the playbook
-Run the playbook: `ansible-playbook -v app.yml`
-List all of the playbook tags: `ansible-playbook --list-tags app.yml`
-Skip updating the upstream submodules: `ansible-playbook -v --skip-tags=update_submodules app.yml`
-View all the tasks: `ansible-playbook --list-tasks app.yml`
+* Run the playbook: `ansible-playbook -v app.yml`
+* List all of the playbook tags: `ansible-playbook --list-tags app.yml`
+* Skip updating the upstream submodules: `ansible-playbook -v --skip-tags=update_submodules app.yml`
+* View all the tasks: `ansible-playbook --list-tasks app.yml`
 
 ### Once finished
 Simply run `docker-compose up` for just your application or 
@@ -206,8 +209,8 @@ not implemented - as a basic set of checks, the testing role will assert that th
 Basic integration tests will also be performed if you have at least one of `svc_discovery` or `event_management` are defined.
 * `svc_discovery` being set will automatically spin up a Consul server in the same network as your application. You can check that 
 the service has registered by connecting to the Consul UI on port 8500 (or whatever Docker mapped it to)
-* `event_management` being set will automatically spin up a Zabbix server in the same network as your application. You can check that
-the service has registered by connecting to the Zabbix UI on port 80 (or whatever Docker mapped it to)
+* _(WIP) `event_management` being set will automatically spin up a Zabbix server in the same network as your application. You can check that
+the service has registered by connecting to the Zabbix UI on port 80 (or whatever Docker mapped it to)_
 ### User-defined tests (WIP)
 Soon we will implement a method of dropping in test files or templates into the relevant tests directory and have it processed. 
 Running an integration system will simply be a case of providing the required Docker compose file/template. 
