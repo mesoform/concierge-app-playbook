@@ -9,6 +9,5 @@ dns_domain: "{{ project_name }}.{{ dept }}.{{ company_domain }}"
 oaas_domain: SETUP_ENV # if we have a different DNS domain for our operational services. E.g. svc.ops.mesoform-services.com
 event_management: SETUP_ENV # address of server for handling our event management and monitoring. E.g. zabbix-server.svc.ops.mesoform-services.com
 svc_discovery: SETUP_ENV # address of server for service discovery. E.g. consul
-consul_as_agent: SETUP_ENV # For service discovery, Containerpilot can connect to the Consul API but it is recommended to leave this true and use an agent
 img_maintainer: SETUP_ENV # In the format of FIRSTNAME SURNAME <localpart@domainpart>
 img_description: SETUP_ENV # describe your application
