@@ -50,6 +50,8 @@ downstream services know which port to use when communicating with your applicat
 * entrypoint (string) = process or script to run as ENTRYPOINT. For the concierge containers, it is assumed that unless you're 
 creating a base image, this will always be containerpilot and already set in the base image.
 * command (string) = the command used to start your application. This will be executed as part of a Containerpilot job.
+* app_config_dir (string) = the directory where you application's configuration files will reside. Currently this must be in /etc.
+Default = `/etc/{{ project_name }}`
 * custom_orchestration_dir = the location where you want your custom application orchestration config template to output to. This is 
 not container orchestration (e.g. docker-compose.yml) but how you want to orchestrate your application (e.g. containerpilot.json). The
 default is /etc inside your container. 
@@ -128,16 +130,14 @@ This will initialise and pull down the submodules, set some defaults for your pr
 Any scripts to be used as part of your application deployment can be added to `{{ playbook_dir }}/files/bin` and will be automatically
 copied to `/usr/local/bin` on the container. You can find an example scripts already in this directory.
 #### Custom application configuration
-Simply drop any custom application configuration into the `{{ playbook_dir }}/files/etc/{{ project_name}}` directory to have it 
-uploaded to the application configuration directory (default = /etc/{{ project_name }}).
+Any Jinja2 templates added to `{{ playbook_dir }}/templates/app` with the `.j2` extension will automatically be processed and copied
+to files/etc/{{ project_name }} where they will be uploaded to the application configuration directory (default =
+/etc/{{ project_name }}). You can find an example of one already in the directory. Even if your files need no processing, simply drop
+the basic files in this directory with a `.j2` extension and they will be copied to you application configuration directory
 #### custom application tests 
 _Not implemented but this will be where to manually add or templates will be copied to for tests. These will be copied to /tmp in the
 container_
-#### Custom application configuration templates
-Any Jinja2 templates added to `{{ playbook_dir }}/templates/app` with the `.j2` extension will automatically be processed and copied
-to files/etc/{{ project_name}} where they will be uploaded to the application configuration directory (default =
-/etc/{{ project_name }}). You can find an example of one already in the directory
-#### Custom application orchestration templates
+#### Custom application orchestration
 Any Jinja2 templates added to `{{ playbook_dir }}/templates/orchestration` with the `.j2` extension will automatically be processed 
 and copied to `files/etc/` where they will be uploaded to the application orchestration directory (default = /etc). You can find an 
 example of one already in the directory. If you want the file to be copied to a different location, set `custom_orchestration_dir` to
