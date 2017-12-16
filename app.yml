@@ -53,4 +53,6 @@
   post_tasks:
     - debug:
         msg: "UPSTREAM SUBMODULES HAVE CHANGED AND UPDATED LOCALLY. THE LAST RUN MAY NOT BE AFFECTED BY THESE CHANGES. PLEASE RERUN THE PLAYBOOK TO RELOAD THEM"
-      when: submodule_update.changed
+      when:
+        - submodule_update is defined
+        - submodule_update.changed
