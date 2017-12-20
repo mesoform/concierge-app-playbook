@@ -185,6 +185,11 @@ install_scripts:
   - /usr/local/bin/install_hadoop.sh
   - /usr/local/bin/install_other_stuff.sh
 ```
+
+These scripts will then run in the order of the list by creating separate
+[RUN instruction](https://docs.docker.com/engine/reference/builder/#run) in your Dockerfile. I.e. in the example, `install_hadoop.sh`
+will run before `install_other_stuff.sh` and in separate image layers.
+
 ### Networking
 We're not trying to create code that will automate your whole production environment, so we've kept the networking configuration
 simple. Leaving `network_mode` unset will select the default network mode for the container runtime platform you're deploying to. At
