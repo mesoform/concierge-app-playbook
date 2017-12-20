@@ -176,10 +176,10 @@ Concierge managed container. It is recommended that you use these but if you wan
 your new image by setting the `base_image_name: your-image-repo:your-image-version` key in your variables file. Otherwise, leave this
 unset and just change `os_distro` to pick up the latest stable version of that flavour.
 ### Install Scripts
-To keep the installation of your application simple and consistent we've set up this playbook so that you can simply name your script 
-`install.sh` and drop it into `files/bin`. This will run as /usr/local/bin/install.sh inside your container. If you want something
-different to run or run multiple scripts (to better make use of [UnionFS](https://en.wikipedia.org/wiki/UnionFS#Uses)), you can do so
-by modifying the `install_scripts` list. For example:
+To keep the installation of your application simple and consistent we've set up this playbook so that you can simply create a script,
+name it `install.sh` and drop it into `files/bin`. This will run as /usr/local/bin/install.sh inside your a build container when creating
+your image. If you want something different to run or run multiple scripts (to better make use of
+ [UnionFS](https://en.wikipedia.org/wiki/UnionFS#Uses)), you can do so by modifying the `install_scripts` list. For example:
 ```
 install_scripts:
   - /usr/local/bin/install_hadoop.sh
