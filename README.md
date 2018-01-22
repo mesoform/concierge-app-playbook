@@ -218,4 +218,6 @@ the service has registered by connecting to the Consul UI on port 8500 (or whate
 the service has registered by connecting to the Zabbix UI on port 80 (or whatever Docker mapped it to)_
 ### User-defined tests (WIP)
 Soon we will implement a method of dropping in test files or templates into the relevant tests directory and have it processed. 
-Running an integration system will simply be a case of providing the required Docker compose file/template. 
+Running an integration system will simply be a case of providing the required Docker compose file/template.
+
+ 
