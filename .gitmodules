@@ -1,9 +1,12 @@
 [submodule "create-concierge-app"]
 	path = create-concierge-app
 	url = https://github.com/mesoform/create-concierge-app.git
+	branch = master
 [submodule "create-concierge-image"]
 	path = create-concierge-image
 	url = https://github.com/mesoform/create-concierge-image.git
+	branch = master
 [submodule "create-concierge-tests"]
 	path = create-concierge-tests
 	url = https://github.com/mesoform/create-concierge-tests.git
+	branch = master
