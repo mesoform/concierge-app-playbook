@@ -18,7 +18,7 @@ Primarily the role generates a Dockerfile, a set of Docker Compose files and a
 [Containerpilot](https://github.com/joyent/containerpilot) file. Then builds an image and runs a set of tests against the build. It
 wraps up some other common roles for creating our Docker images ready to be used in a Concierge Paradigm environment.  The role has
 been split into 4 parts:
-1. configure-concierge-repo: This repository. The purpose of which is to get you your own custom repository setup to start building 
+1. concierge-app-playbook: This repository. The purpose of which is to get you your own custom repository setup to start building 
 your application container
 1. create-concierge-app: This submodule role takes the variables, scripts and any files needed for your application and constructs 
 the necessary application configuration files (if using templates) and orchestration files for managing the lifecycle of your 
