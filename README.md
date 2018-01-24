@@ -54,7 +54,9 @@ creating a base image, this will always be containerpilot and already set in the
 Default = `/etc/{{ project_name }}`
 * custom_orchestration_dir = the location where you want your custom application orchestration config template to output to. This is 
 not container orchestration (e.g. docker-compose.yml) but how you want to orchestrate your application (e.g. containerpilot.json). The
-default is /etc inside your container. 
+default is /etc inside your container.
+* upstreams (list) = a list of service names, registered in Consul and which your application depends upon
+* downstreams (list) = a list of clients which are registed in Consul as a service; and your application may want to configure access for
 
 See vars/main.yml and defaults/main.yml for others variables and their descriptions and any non-declared container orchestration 
 options like mem_limit (defaults to 128MB)are best updated in the compose files at the end.
@@ -75,6 +77,8 @@ you value it. What you also need to know is that we choose to use
 [active discovery](http://containersummit.io/articles/active-vs-passive-discovery) and chose to use [Consul](http://consul.io) to 
 perform that function. We aren't opinionated about using Consul but currently this playbook is. Partly this is due to time writing
 the code but also, we do genuinely believe Consul is the best product on the market for this, right now.
+
+The use of upstreams variable will set some conditions in your orchestration. Firstly, when starting up, your application will wait on these services being marked as healthy if you have a pre_start job; and will reload when any changes happen to these services (`reload` variable is required to have a value of the command to reload the application)
 
 Some other things you need to know:
 1. We've written this code in such a way as to use DNS search domains so that containers and services can more easily be recognised
@@ -123,7 +127,7 @@ In Github, Bitbucket or whatever system you like and copy the URL to your clipbo
 ./setup.sh  --initialise-git
 ```
 
-This will initialise and pull down the submodules, set some defaults for your project and perform an initial commit.
+This will initialise and pull down the submodules, set some defaults for your project and perform an initial commit. NOTE - --initialise-git is only needed once, after you first clone the repository.
 
 ### Add custom files to the right directories
 #### Custom application scripts
