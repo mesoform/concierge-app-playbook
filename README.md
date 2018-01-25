@@ -69,7 +69,8 @@ submodule roles backward compatible but sometimes things accidents happen and so
 output messages to indicate that changes have happened but also advise that you watch the included each roles'repositories as well.
 
 If you want to run the playbook without doing this, either remove the relevant entry from .gitmodules or run with
- `--skip-tags=update_submodules`
+ `--skip-tags=update_submodules`. Likewise, if you are pulling your own repository, which is generated from this one, and you just want 
+ to update just the submodules, run `ansible-playbook app.yml -t update_submodules`.
 
 ## Service discovery<a name="service-discovery"></a>
 Service discovery as a subject is beyond the scope of this documentation but if you're chosing to use this repository it's because 
