@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-# Setup script for a initialising our playbook to create a Concierge Managed Application
-# http://www.mesoform.com/blog-listing/info/the-concierge-paradigm
-
 PARAM=$1
 CONFIG_FILE=./ansible.cfg
 DEFAULTS_FILE=defaults/main.yml
@@ -84,7 +81,7 @@ done 9< <(grep SETUP_ENV ${DEFAULTS_FILE})
 if [[ ! -e README-Concierge.md ]]; then
     echo -e "blanking README\n\n"
     mv README.md README-Concierge.md
-    echo -e "# New Concierge Project Playbook\n\n[Template by Mesoform Limited](http://www.mesoform.com)" > README.md
+    echo -e "# New Concierge Project Playbook\n\nTemplate by [Mesoform Limited](http://www.mesoform.com)" > README.md
 fi
 
 # remove tmp files
@@ -113,16 +110,13 @@ if [[ -n ${GIT_INITIALISATION} ]]; then
        echo -e "\n\n"
        echo "pushing"
        git push --set-upstream origin master
-       [[ $? -eq 0 ]] && echo -e "\n\nDone!\nCheck vars/main.yml for required variables which need setting\n" \
-         || echo -e "Something went wrong! :(\n"
+       [[ $? -eq 0 ]] && echo -e "Done!\n" || echo -e "Something went wrong! :(\n"
     elif [[ ${COMMIT} == n ]]; then
         exit 0
-        echo -e "\n\n"
-        echo -e "Done!\nCheck vars/main.yml for required variables which need setting\n"
+        echo -e "Done!\n"
     fi
 else
-    echo -e "\n\n"
-    echo -e "Done!\nCheck vars/main.yml for required variables which need setting\n"
+    echo -e "Done!\n"
 fi
 
 # verify success
