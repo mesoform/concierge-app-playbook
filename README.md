@@ -18,7 +18,7 @@ Primarily the role generates a Dockerfile, a set of Docker Compose files and a
 [Containerpilot](https://github.com/joyent/containerpilot) file. Then builds an image and runs a set of tests against the build. It
 wraps up some other common roles for creating our Docker images ready to be used in a Concierge Paradigm environment.  The role has
 been split into 4 parts:
-1. configure-concierge-repo: This repository. The purpose of which is to get you your own custom repository setup to start building 
+1. concierge-app-playbook: This repository. The purpose of which is to get you your own custom repository setup to start building 
 your application container
 1. create-concierge-app: This submodule role takes the variables, scripts and any files needed for your application and constructs 
 the necessary application configuration files (if using templates) and orchestration files for managing the lifecycle of your 
@@ -54,7 +54,9 @@ creating a base image, this will always be containerpilot and already set in the
 Default = `/etc/{{ project_name }}`
 * custom_orchestration_dir = the location where you want your custom application orchestration config template to output to. This is 
 not container orchestration (e.g. docker-compose.yml) but how you want to orchestrate your application (e.g. containerpilot.json). The
-default is /etc inside your container. 
+default is /etc inside your container.
+* upstreams (list) = a list of service names, registered in Consul and which your application depends upon
+* downstreams (list) = a list of clients which are registed in Consul as a service; and your application may want to configure access for
 
 See vars/main.yml and defaults/main.yml for others variables and their descriptions and any non-declared container orchestration 
 options like mem_limit (defaults to 128MB)are best updated in the compose files at the end.
@@ -67,7 +69,8 @@ submodule roles backward compatible but sometimes things accidents happen and so
 output messages to indicate that changes have happened but also advise that you watch the included each roles'repositories as well.
 
 If you want to run the playbook without doing this, either remove the relevant entry from .gitmodules or run with
- `--skip-tags=update_submodules`
+ `--skip-tags=update_submodules`. Likewise, if you are pulling your own repository, which is generated from this one, and you just want 
+ to update just the submodules, run `ansible-playbook app.yml -t update_submodules`.
 
 ## Service discovery<a name="service-discovery"></a>
 Service discovery as a subject is beyond the scope of this documentation but if you're chosing to use this repository it's because 
@@ -75,6 +78,8 @@ you value it. What you also need to know is that we choose to use
 [active discovery](http://containersummit.io/articles/active-vs-passive-discovery) and chose to use [Consul](http://consul.io) to 
 perform that function. We aren't opinionated about using Consul but currently this playbook is. Partly this is due to time writing
 the code but also, we do genuinely believe Consul is the best product on the market for this, right now.
+
+The use of upstreams variable will set some conditions in your orchestration. Firstly, when starting up, your application will wait on these services being marked as healthy if you have a pre_start job; and will reload when any changes happen to these services (`reload` variable is required to have a value of the command to reload the application)
 
 Some other things you need to know:
 1. We've written this code in such a way as to use DNS search domains so that containers and services can more easily be recognised
@@ -123,7 +128,7 @@ In Github, Bitbucket or whatever system you like and copy the URL to your clipbo
 ./setup.sh  --initialise-git
 ```
 
-This will initialise and pull down the submodules, set some defaults for your project and perform an initial commit.
+This will initialise and pull down the submodules, set some defaults for your project and perform an initial commit. NOTE - --initialise-git is only needed once, after you first clone the repository.
 
 ### Add custom files to the right directories
 #### Custom application scripts
@@ -133,11 +138,7 @@ copied to `/usr/local/bin` on the container. You can find an example scripts alr
 Any Jinja2 templates added to `{{ playbook_dir }}/templates/app` with the `.j2` extension will automatically be processed and copied
 to files/etc/{{ project_name }} where they will be uploaded to the application configuration directory (default =
 /etc/{{ project_name }}). You can find an example of one already in the directory. Even if your files need no processing, simply drop
-the basic files in this directory with a `.j2` extension and they will be copied to you application configuration directory.
-
-You can add any static scripts and configuration to any other directory in the container by simply adding the full path, relative to
-the root directory where you want the file to end up at, beneath the `files/` directory. For example, If you want something copied to 
-`/usr/libexec/bin` inside the container, you will need to create `files/usr/libexec/bin/some_file`.
+the basic files in this directory with a `.j2` extension and they will be copied to you application configuration directory
 #### custom application tests 
 _Not implemented but this will be where to manually add or templates will be copied to for tests. These will be copied to /tmp in the
 container_
@@ -224,4 +225,4 @@ the service has registered by connecting to the Zabbix UI on port 80 (or whateve
 Soon we will implement a method of dropping in test files or templates into the relevant tests directory and have it processed. 
 Running an integration system will simply be a case of providing the required Docker compose file/template.
 
-[Template by Mesoform Limited](http://www.mesoform.com)
+ 
