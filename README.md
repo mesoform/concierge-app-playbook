@@ -133,7 +133,11 @@ copied to `/usr/local/bin` on the container. You can find an example scripts alr
 Any Jinja2 templates added to `{{ playbook_dir }}/templates/app` with the `.j2` extension will automatically be processed and copied
 to files/etc/{{ project_name }} where they will be uploaded to the application configuration directory (default =
 /etc/{{ project_name }}). You can find an example of one already in the directory. Even if your files need no processing, simply drop
-the basic files in this directory with a `.j2` extension and they will be copied to you application configuration directory
+the basic files in this directory with a `.j2` extension and they will be copied to you application configuration directory.
+
+You can add any static scripts and configuration to any other directory in the container by simply adding the full path, relative to
+the root directory where you want the file to end up at, beneath the `files/` directory. For example, If you want something copied to 
+`/usr/libexec/bin` inside the container, you will need to create `files/usr/libexec/bin/some_file`.
 #### custom application tests 
 _Not implemented but this will be where to manually add or templates will be copied to for tests. These will be copied to /tmp in the
 container_
@@ -220,4 +224,4 @@ the service has registered by connecting to the Zabbix UI on port 80 (or whateve
 Soon we will implement a method of dropping in test files or templates into the relevant tests directory and have it processed. 
 Running an integration system will simply be a case of providing the required Docker compose file/template.
 
- 
+[Template by Mesoform Limited](http://www.mesoform.com)
