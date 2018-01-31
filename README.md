@@ -230,5 +230,5 @@ Soon we will implement a method of dropping in test files or templates into the 
 Running an integration system will simply be a case of providing the required Docker compose file/template.
 
 
-`-------------------------------------------------------------------------------------------------------------------------`
+`-----------------------------------------------------------------------------------------------------------------`
 Template by [Mesoform Limited](http://www.mesoform.com)
