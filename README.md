@@ -32,31 +32,31 @@ The Dockerfile has some default attributes automatically set and allows for othe
 variables.
 
 Currently these are as follows:
-* os_distro (string) = The flavour of operating system. Current options are `alpine` and `debian` - versions *3.4* and *jessie*, 
+* `os_distro` (string) = The flavour of operating system. Current options are `alpine` and `debian` - versions *3.4* and *jessie*, 
 respectively
-* install_scripts (list) = the location of the script or scripts to install the application you want to package into the image. A 
+* `install_scripts` (list) = the location of the script or scripts to install the application you want to package into the image. A 
 list is used so as to logically separate different install steps into separate RUN commands and better make use of UnionFS image 
 layers
-* build_args (list) = a list of additional Docker ARG options for required variables when building
-* container_vars (list) = a list of environment variables which will be set as defaults inside the running container. E.g. 
+* `build_args` (list) = a list of additional Docker ARG options for required variables when building
+* `container_vars` (list) = a list of environment variables which will be set as defaults inside the running container. E.g. 
 container_vars: FOO=bar
-* env_vars (list) = a list of additional environment variables which will be passed to the container at runtime. E.g. env_vars: 
+* `env_vars` (list) = a list of additional environment variables which will be passed to the container at runtime. E.g. env_vars: 
 FOO=bar
-* labels (list) = a list of additional labels to add to the container 
-* ports (list) = a list of ports to expose
-* service_port (integer) = the port of your application which will be registered with with the service discovery system so that
-downstream services know which port to use when communicating with your application.  
-* volumes (list) = a list of volume the container should create
-* entrypoint (string) = process or script to run as ENTRYPOINT. For the concierge containers, it is assumed that unless you're 
+* `labels` (list) = a list of additional labels to add to the container 
+* `ports` (list) = a list of ports to expose
+* `service_port` (integer) = the port of your application which will be registered with with the service discovery system so that
+downstream services know which port to use when communicating with your application. **`service_port` is a required field if you want your application to register as a service in Consul and be discoverable**
+* `volumes` (list) = a list of volume the container should create
+* `entrypoint` (string) = process or script to run as ENTRYPOINT. For the concierge containers, it is assumed that unless you're 
 creating a base image, this will always be containerpilot and already set in the base image.
-* command (string) = the command used to start your application. This will be executed as part of a Containerpilot job.
-* app_config_dir (string) = the directory where you application's configuration files will reside. Currently this must be in /etc.
+* `command` (string) = the command used to start your application. This will be executed as part of a Containerpilot job.
+* `app_config_dir` (string) = the directory where you application's configuration files will reside. Currently this must be in /etc.
 Default = `/etc/{{ project_name }}`
-* custom_orchestration_dir = the location where you want your custom application orchestration config template to output to. This is 
+* `custom_orchestration_dir` = the location where you want your custom application orchestration config template to output to. This is 
 not container orchestration (e.g. docker-compose.yml) but how you want to orchestrate your application (e.g. containerpilot.json). The
 default is /etc inside your container.
-* upstreams (list) = a list of service names, registered in Consul and which your application depends upon
-* downstreams (list) = a list of clients which are registed in Consul as a service; and your application may want to configure access for
+* `upstreams` (list) = a list of service names, registered in Consul and which your application depends upon
+* `downstreams` (list) = a list of clients which are registed in Consul as a service; and your application may want to configure access for
 
 See vars/main.yml and defaults/main.yml for others variables and their descriptions and any non-declared container orchestration 
 options like mem_limit (defaults to 128MB)are best updated in the compose files at the end.
