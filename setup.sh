@@ -81,7 +81,9 @@ done 9< <(grep SETUP_ENV ${DEFAULTS_FILE})
 if [[ ! -e README-Concierge.md ]]; then
     echo -e "blanking README\n\n"
     mv README.md README-Concierge.md
-    echo -e "# New Concierge Project Playbook\n\nTemplate by [Mesoform Limited](http://www.mesoform.com)" > README.md
+    echo -e "# New Concierge Project Playbook\n\n" > README.md
+    echo -e "`-----------------------------------------------------------------------------------------------------------------`" >> README.md
+    echo -e "Template by [Mesoform Limited](http://www.mesoform.com)" >> README.md
 fi
 
 # remove tmp files
