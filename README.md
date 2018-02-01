@@ -229,6 +229,9 @@ check that the service has registered by connecting to the Zabbix UI on port 80 
 Soon we will implement a method of dropping in test files or templates into the relevant tests directory and have it processed. 
 Running an integration system will simply be a case of providing the required Docker compose file/template.
 
-
+## Examples
+Have a look at our [example Apache application configured as a forward proxy](https://github.com/mesoform/apache-fwdproxy). We also 
+integrate this with a [Squid proxy where we demonstrate the beginnings of a basic identity aware 
+proxy](https://github.com/mesoform/squid-gcp-proxy)
 `-----------------------------------------------------------------------------------------------------------------`
 Template by [Mesoform Limited](http://www.mesoform.com)
