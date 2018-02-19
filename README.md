@@ -73,7 +73,7 @@ If you want to run the playbook without doing this, either remove the relevant e
  to update just the submodules, run `ansible-playbook app.yml -t update_submodules`.
 
 ## Service discovery<a name="service-discovery"></a>
-Service discovery as a subject is beyond the scope of this documentation but if you're chosing to use this repository it's because 
+Service discovery as a subject is beyond the scope of this documentation but if you're choosing to use this repository it's because 
 you value it. What you also need to know is that we choose to use
 [active discovery](http://containersummit.io/articles/active-vs-passive-discovery) and chose to use [Consul](http://consul.io) to 
 perform that function. We aren't opinionated about using Consul but currently this playbook is. Partly this is due to time writing
@@ -82,13 +82,17 @@ the code but also, we do genuinely believe Consul is the best product on the mar
 The use of upstreams variable will set some conditions in your orchestration. Firstly, when starting up, your application will wait on these services being marked as healthy if you have a pre_start job; and will reload when any changes happen to these services (`reload` variable is required to have a value of the command to reload the application)
 
 Some other things you need to know:
+1. If you already have a service discovery or event management system running and you want to test against these, instead of spinning
+ up new container instances, you can set `svc_discovery_server` and/or `event_management_server` variables to the server addresses
+ and you'll configure your container to use these and won't get additional container starting up.
 1. We've written this code in such a way as to use DNS search domains so that containers and services can more easily be recognised
 within your domains. For example, if you set `dns_domain=mesoform.com`, `oaas_domain=svc.mesoform.com` and `svc_discovery=consul` 
 then the Consul agent running in your container will look for your service discovery system with the following addresses `consul`,
 `consul.mesoform.com` and `consul.svc.mesoform.com`.
 1. Therefore, if you have a system already running and in place that is reachable on the address
-`service-discovery.ops.myservices.internal` you can set `svc_discovery` to `service-dicovery` (as long as `dns_domain` or
-`oaas_domain` match `ops.myservices.internal`) or `service-discovery.ops.myservices.internal`
+`service-discovery.ops.myservices.internal` you can set `svc_discovery_server` to `service-dicovery` or
+ `service-discovery.ops.myservices.internal`. Then, as long as `dns_domain` or `oaas_domain` match `ops.myservices.internal`, normal
+ DNS searching will get your requests to the right place
 1. You don't have to have a full blown discovery system running to build your application container image. If you don't set a value 
 for `svc_discovery`, then the consul agent running inside the container will simply start in development mode so that even if your
 job is a service, it will still run as expected.

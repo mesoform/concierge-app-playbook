@@ -7,7 +7,7 @@ dept: SETUP_ENV # department/subdomain for the software. E.g. consul.DISCOVERY.m
 os_distro: SETUP_ENV # what flavour of operating system. Current options are alpine and debian
 dns_domain: "{{ project_name }}.{{ dept }}.{{ company_domain }}"
 oaas_domain: SETUP_ENV # if we have a different DNS domain for our operational services. E.g. svc.ops.mesoform-services.com
-event_management: SETUP_ENV # address of server for handling our event management and monitoring. E.g. zabbix-server.svc.ops.mesoform-services.com
-svc_discovery: SETUP_ENV # address of server for service discovery. E.g. consul
+event_management: SETUP_ENV # the event management and monitoring system we're using. E.g. zabbix
+svc_discovery: SETUP_ENV # service discovery system we're using. E.g. consul
 img_maintainer: SETUP_ENV # In the format of FIRSTNAME SURNAME <localpart@domainpart>
 img_description: SETUP_ENV # describe your application
