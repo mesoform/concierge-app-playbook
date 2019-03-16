@@ -45,7 +45,8 @@ FOO=bar
 * `labels` (list) = a list of additional labels to add to the container 
 * `ports` (list) = a list of ports to expose
 * `service_port` (integer) = the port of your application which will be registered with with the service discovery system so that
-downstream services know which port to use when communicating with your application. **`service_port` is a required field if you want your application to register as a service in Consul and be discoverable**
+downstream services know which port to use when communicating with your application. **`service_port` is a required field if you want
+ your application to register as a service in Consul and be discoverable**
 * `volumes` (list) = a list of volume the container should create
 * `entrypoint` (string) = process or script to run as ENTRYPOINT. For the concierge containers, it is assumed that unless you're 
 creating a base image, this will always be containerpilot and already set in the base image.
@@ -79,7 +80,9 @@ you value it. What you also need to know is that we choose to use
 perform that function. We aren't opinionated about using Consul but currently this playbook is. Partly this is due to time writing
 the code but also, we do genuinely believe Consul is the best product on the market for this, right now.
 
-The use of upstreams variable will set some conditions in your orchestration. Firstly, when starting up, your application will wait on these services being marked as healthy if you have a pre_start job; and will reload when any changes happen to these services (`reload` variable is required to have a value of the command to reload the application)
+The use of upstreams variable will set some conditions in your orchestration. Firstly, when starting up, your application will wait on
+ these services being marked as healthy if you have a pre_start job; and will reload when any changes happen to these services
+  (`reload` variable is required to have a value of the command to reload the application)
 
 Some other things you need to know:
 1. If you already have a service discovery or event management system running and you want to test against these, instead of spinning
@@ -132,7 +135,8 @@ In Github, Bitbucket or whatever system you like and copy the URL to your clipbo
 ./setup.sh  --initialise-git
 ```
 
-This will initialise and pull down the submodules, set some defaults for your project and perform an initial commit. NOTE - --initialise-git is only needed once, after you first clone the repository.
+This will initialise and pull down the submodules, set some defaults for your project and perform an initial commit. NOTE:
+ --initialise-git is only needed once, after you first clone the repository.
 
 ### Add custom files to the right directories
 #### Custom application scripts
@@ -147,7 +151,12 @@ the basic files in this directory with a `.j2` extension and they will be copied
 You can add any static scripts and configuration to any other directory in the container by simply adding the full path, relative to
 the root directory where you want the file to end up at, beneath the `files/` directory. For example, If you want something copied to 
 `/usr/libexec/bin` inside the container, you will need to create `files/usr/libexec/bin/some_file`.
-#### custom application tests 
+#### Custom application configuration templates
+If you need to process any Jinja templates specific to your application which don't belong in the standard application configuration
+directory (default: `/etc/{{ project_name }}`), copy your template (with a `.j2` extension) into the relative path in the templates
+ directory and it will be processed into the matching path in your container. E.g. if you want to process a template into
+  `/etc/mail/spamassassin/local.cf`, create `templates/etc/mail/spamassassin/local.cf.j2`
+#### Custom application tests 
 _Not implemented but this will be where to manually add or templates will be copied to for tests. These will be copied to /tmp in the
 container_
 #### Custom application orchestration
