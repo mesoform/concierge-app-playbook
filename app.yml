@@ -34,9 +34,8 @@
 
       - debug:
           msg: "UPSTREAM SUBMODULES HAVE BEEN UPDATED. PLEASE RERUN THE PLAYBOOK TO RELOAD THEM"
-        when:
-          - submodule_update.changed
-        failed_when: submodule_update.changed
+        when: submodule_update.changed or submodule_stash.changed
+        failed_when: submodule_update.changed or submodule_stash.changed
 
       - debug:
           msg: "UPSTREAM SUBMODULES ADDED LOCALLY. PLEASE RERUN THE PLAYBOOK TO RELOAD THEM"
