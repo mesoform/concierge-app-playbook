@@ -121,6 +121,11 @@ address specified in the value. The same goes with the DNS points, so if `event_
 
 _(WIP) You will also get a service definition for our pre-configured EMM in `docker-compose-integrations.yml`_ 
 ## Setting up
+### Environment variables
+Ansible default output isn't great when trying to debug large data output so firstly set ANSIBLE_STDOUT_CALLBACK
+```bash
+export ANSIBLE_STDOUT_CALLBACK=yaml
+```
 ### Clone the repository
 ```
 cd {{ roles_dir }}
