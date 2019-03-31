@@ -20,7 +20,7 @@
         when: submodules_locally.examined == 0
 
       - name: stashing any local changes to common roles
-        command: git submodule foreach 'git stash'
+        command: git submodule foreach 'git stash --all'
         register: submodule_stash
         changed_when:
           - submodule_stash.stdout != "Entering 'create-concierge-app'\nNo local changes to save\nEntering 'create-concierge-image'\nNo local changes to save\nEntering 'create-concierge-tests'\nNo local changes to save"
