@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="184.719597mm" height="111.708709mm" version="1.1" viewBox="84.503654 -15.176926 959.958191 580.532288">
+  <!--
+	Exported with Concepts: Smarter Sketching
+	Version: 660
+	iOS Version: 12.1
+	https://concepts.app/
+	-->
+  <title>docker-compose testing override pattern</title>
+  <desc>Drawing exported from Concepts: Smarter Sketching</desc>
+  <g id="Wire" opacity="1.000">
+    <path id="STROKE_99B8B870-D398-4F20-B8C9-D4BF2828D232" opacity="1.000" fill="none" stroke="#000000" stroke-width="3.952" stroke-opacity="1.000" stroke-linecap="round" stroke-linejoin="round" d="M 155.939 40.063 L 367.561 40.063 L 367.562 120.436 L 155.939 120.436 Z"></path>
+    <path id="STROKE_8D9FEB83-E08F-4B67-91FD-0ADB0A568F3D" opacity="1.000" fill="none" stroke="#000000" stroke-width="3.952" stroke-opacity="1.000" stroke-linecap="round" stroke-linejoin="round" d="M 510.939 39.563 L 722.562 39.563 L 722.562 119.936 L 510.939 119.936 Z"></path>
+    <path id="STROKE_C92E14AE-1A1E-4A1A-A8F2-DDEFB6FC9CBB" opacity="0.830" fill="none" stroke="#000000" stroke-width="3.952" stroke-opacity="1.000" stroke-linecap="round" stroke-linejoin="round" d="M 369.399 79.434 L 404.662 62.908 L 404.531 96.238 Z"></path>
+    <path id="STROKE_40ECBB3E-2E56-40E1-8344-3A29745E34ED" opacity="1.000" fill="none" stroke="#000000" stroke-width="3.952" stroke-opacity="1.000" stroke-linecap="round" stroke-linejoin="round" d="M 155.439 174.563 L 367.062 174.563 L 367.062 254.936 L 155.439 254.936 Z"></path>
+    <path id="STROKE_DE1CDC8F-37FD-4046-B8F3-71E7C2841980" opacity="1.000" fill="none" stroke="#000000" stroke-width="3.952" stroke-opacity="1.000" stroke-linecap="round" stroke-linejoin="round" d="M 507.439 177.563 L 719.062 177.563 L 719.062 257.936 L 507.439 257.936 Z"></path>
+    <path id="STROKE_98135D56-0D32-44D1-A53B-F6C3D3E625AE" opacity="1.000" fill="none" stroke="#000000" stroke-width="3.952" stroke-opacity="1.000" stroke-linecap="round" stroke-linejoin="round" d="M 506.067 214.181 L 369.314 212.992 "></path>
+    <path id="STROKE_3D4566A8-9F86-49AE-A54A-C1766B20776A" opacity="0.830" fill="none" stroke="#000000" stroke-width="3.952" stroke-opacity="1.000" stroke-linecap="round" stroke-linejoin="round" d="M 370.399 211.934 L 405.662 195.408 L 405.531 228.738 Z"></path>
+    <path id="STROKE_3802B0DE-6018-437F-8A1E-5A0509496581" opacity="1.000" fill="none" stroke="#000000" stroke-width="3.952" stroke-opacity="1.000" stroke-linecap="round" stroke-linejoin="round" d="M 154.439 316.063 L 366.062 316.063 L 366.062 396.436 L 154.439 396.436 Z"></path>
+    <path id="STROKE_80FDF78B-F9BA-478B-B214-1954607CB09E" opacity="0.830" fill="none" stroke="#000000" stroke-width="3.952" stroke-opacity="1.000" stroke-linecap="round" stroke-linejoin="round" d="M 369.399 353.434 L 404.662 336.908 L 404.531 370.238 Z"></path>
+    <path id="STROKE_0773CDFA-9A95-4BDD-BA85-0285E142E38E" opacity="1.000" fill="none" stroke="#000000" stroke-width="3.952" stroke-opacity="1.000" stroke-linecap="round" stroke-linejoin="round" d="M 507.567 354.681 L 370.814 353.492 "></path>
+    <path id="STROKE_6D963E6D-334F-46BE-9027-C82FCC80C14A" opacity="1.000" fill="none" stroke="#000000" stroke-width="3.952" stroke-opacity="1.000" stroke-linecap="round" stroke-linejoin="round" d="M 509.939 315.563 L 721.562 315.563 L 721.562 395.936 L 509.939 395.936 Z"></path>
+    <path id="STROKE_4B3A3DF0-AEFB-4403-ACC6-8201FA3439FF" opacity="1.000" fill="none" stroke="#000000" stroke-width="3.952" stroke-opacity="1.000" stroke-linecap="round" stroke-linejoin="round" d="M 151.439 424.563 L 363.061 424.563 L 363.062 504.936 L 151.439 504.936 Z"></path>
+    <path id="STROKE_4EE2969F-AB27-47DE-89D9-E0B0ABE999CC" opacity="1.000" fill="none" stroke="#000000" stroke-width="3.952" stroke-opacity="1.000" stroke-linecap="round" stroke-linejoin="round" d="M 783.939 419.563 L 995.562 419.563 L 995.562 499.936 L 783.939 499.936 Z"></path>
+    <path id="STROKE_B9F65575-D322-4713-8800-3B7BCDF91B3B" opacity="0.830" fill="none" stroke="#000000" stroke-width="3.952" stroke-opacity="1.000" stroke-linecap="round" stroke-linejoin="round" d="M 364.899 463.934 L 400.162 447.408 L 400.031 480.738 Z"></path>
+  </g>
+  <g id="Text" opacity="1.000">
+    <g id="LABEL_C1F96B76-3165-47FB-8F34-43D06B3FA5D4" opacity="1.000" transform="matrix(0.768209 0.000008 -0.000006 1.020458 267.362122 78.427612)">
+      <text x="0" y="0" text-anchor="middle" alignment-baseline="mathematical" font-size="24.000" font-weight="lighter" fill="#000000" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif">
+        <tspan x="0" dy="0.000em">docker-compose.yml </tspan>
+      </text>
+    </g>
+    <path id="STROKE_D410825B-5B60-43A8-A3D8-8B759F88A3F3" opacity="1.000" fill="none" stroke="#000000" stroke-width="3.952" stroke-opacity="1.000" stroke-linecap="round" stroke-linejoin="round" d="M 509.590 80.357 L 372.372 79.167 "></path>
+    <g id="LABEL_18C3454E-535E-4C75-A573-11C126999512" opacity="1.000" transform="matrix(0.627335 0.000012 -0.000009 0.836781 618.114624 81.177307)">
+      <text x="0" y="0" text-anchor="middle" alignment-baseline="mathematical" font-size="24.000" font-weight="lighter" fill="#000000" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif">
+        <tspan x="0" dy="0.000em">docker-compose-override.yml </tspan>
+      </text>
+    </g>
+    <g id="LABEL_E72DECAF-0EDB-4CED-B068-779D3C3CD12F" opacity="1.000" transform="matrix(0.627340 0.000010 -0.000007 0.836771 263.114655 215.677307)">
+      <text x="0" y="0" text-anchor="middle" alignment-baseline="mathematical" font-size="24.000" font-weight="lighter" fill="#000000" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif">
+        <tspan x="0" dy="0.000em">docker-compose-units.yml </tspan>
+      </text>
+    </g>
+    <g id="LABEL_63BED1DD-D880-4B2C-819F-2DC22BEC5C6F" opacity="1.000" transform="matrix(0.532281 0.000018 -0.000010 0.979628 615.364624 218.428162)">
+      <text x="0" y="0" text-anchor="middle" alignment-baseline="mathematical" font-size="24.000" font-weight="lighter" fill="#000000" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif">
+        <tspan x="0" dy="0.000em">docker-compose-units-override.yml </tspan>
+      </text>
+    </g>
+    <g id="LABEL_15E32526-1BFB-4522-BE13-C306D8D79759" opacity="1.000" transform="matrix(1.857147 -0.000008 0.000008 1.871719 136.094406 36.719788)">
+      <text x="0" y="0" text-anchor="middle" alignment-baseline="mathematical" font-size="24.000" font-weight="lighter" fill="#000000" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif">
+        <tspan x="0" dy="0.000em">-f</tspan>
+      </text>
+    </g>
+    <g id="LABEL_E68A58BC-56C6-4505-BF5D-8A646D167E1B" opacity="1.000" transform="matrix(1.857147 -0.000006 0.000006 1.871734 132.094406 170.219849)">
+      <text x="0" y="0" text-anchor="middle" alignment-baseline="mathematical" font-size="24.000" font-weight="lighter" fill="#000000" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif">
+        <tspan x="0" dy="0.000em">-f</tspan>
+      </text>
+    </g>
+    <g id="LABEL_F6B25A82-3D1C-4805-8BB4-E933C92C4277" opacity="1.000" transform="matrix(1.857153 -0.000006 0.000006 1.871734 477.094391 176.219849)">
+      <text x="0" y="0" text-anchor="middle" alignment-baseline="mathematical" font-size="24.000" font-weight="lighter" fill="#000000" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif">
+        <tspan x="0" dy="0.000em">-f</tspan>
+      </text>
+    </g>
+    <g id="LABEL_41F5A604-BED9-469C-993B-176C4B7440EC" opacity="1.000" transform="matrix(1.857153 -0.000004 0.000004 1.871749 483.594391 312.719849)">
+      <text x="0" y="0" text-anchor="middle" alignment-baseline="mathematical" font-size="24.000" font-weight="lighter" fill="#000000" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif">
+        <tspan x="0" dy="0.000em">-f</tspan>
+      </text>
+    </g>
+    <g id="LABEL_67C13B46-E130-4723-88D6-CFED430FFACF" opacity="1.000" transform="matrix(0.548294 0.000002 -0.000001 0.918380 258.612549 356.177307)">
+      <text x="0" y="0" text-anchor="middle" alignment-baseline="mathematical" font-size="24.000" font-weight="lighter" fill="#000000" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif">
+        <tspan x="0" dy="0.000em">docker-compose-integrations.yml </tspan>
+      </text>
+    </g>
+    <g id="LABEL_7149F5CA-A0AB-4E70-9E00-90492C847863" opacity="1.000" transform="matrix(0.446763 0.000004 -0.000002 0.959312 614.864197 355.676727)">
+      <text x="0" y="0" text-anchor="middle" alignment-baseline="mathematical" font-size="24.000" font-weight="lighter" fill="#000000" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif">
+        <tspan x="0" dy="0.000em">docker-compose-integrations-override.yml </tspan>
+      </text>
+    </g>
+    <g id="LABEL_C4D13D7B-266E-491D-805A-8FBC562DEB10" opacity="1.000" transform="matrix(0.768209 0.000003 -0.000002 1.020428 262.862122 462.927612)">
+      <text x="0" y="0" text-anchor="middle" alignment-baseline="mathematical" font-size="24.000" font-weight="lighter" fill="#000000" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif">
+        <tspan x="0" dy="0.000em">docker-compose.yml </tspan>
+      </text>
+    </g>
+    <path id="STROKE_80F64EDB-F326-41F8-88A6-3C775CFAF874" opacity="1.000" fill="none" stroke="#000000" stroke-width="3.952" stroke-opacity="1.000" stroke-linecap="round" stroke-linejoin="round" d="M 782.575 463.074 L 367.389 462.949 "></path>
+    <g id="LABEL_4B8F9A07-CF19-40EB-ABED-EE60C6194610" opacity="1.000" transform="matrix(0.627332 0.000005 -0.000004 0.836753 891.114563 461.177307)">
+      <text x="0" y="0" text-anchor="middle" alignment-baseline="mathematical" font-size="24.000" font-weight="lighter" fill="#000000" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif">
+        <tspan x="0" dy="0.000em">docker-compose-override.yml </tspan>
+      </text>
+    </g>
+    <g id="LABEL_319B7D00-06B3-4A8B-8D93-90A5C7FF743A" opacity="1.000" transform="matrix(1.857157 -0.000003 0.000003 1.871760 759.594360 417.219849)">
+      <text x="0" y="0" text-anchor="middle" alignment-baseline="mathematical" font-size="24.000" font-weight="lighter" fill="#000000" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif">
+        <tspan x="0" dy="0.000em">-f</tspan>
+      </text>
+    </g>
+    <path id="STROKE_C6FF1F02-59AF-488C-B3B6-525D9F6E9EB2" opacity="1.000" fill="none" stroke="#a4daef" stroke-width="4.165" stroke-opacity="1.000" stroke-linecap="round" stroke-linejoin="round" d="M 98.417 282.809 L 1032.468 282.809 L 1032.468 553.361 L 98.418 553.362 Z"></path>
+    <path id="STROKE_9DFFAD29-8DAE-4AF2-AA0B-7687D9AB998B" opacity="1.000" fill="none" stroke="#a4daef" stroke-width="2.629" stroke-opacity="1.000" stroke-linecap="round" stroke-linejoin="round" d="M 97.236 141.529 L 789.649 141.529 L 789.650 276.142 L 97.237 276.143 Z"></path>
+    <path id="STROKE_3A96209B-49AC-4322-AA68-873A61A5155D" opacity="1.000" fill="none" stroke="#a4daef" stroke-width="2.666" stroke-opacity="1.000" stroke-linecap="round" stroke-linejoin="round" d="M 95.748 -3.933 L 792.638 -3.933 L 792.638 133.603 L 95.749 133.604 Z"></path>
+  </g>
+</svg>

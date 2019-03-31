@@ -50,14 +50,17 @@ downstream services know which port to use when communicating with your applicat
 * `volumes` (list) = a list of volume the container should create
 * `entrypoint` (string) = process or script to run as ENTRYPOINT. For the concierge containers, it is assumed that unless you're 
 creating a base image, this will always be containerpilot and already set in the base image.
-* `command` (string) = the command used to start your application. This will be executed as part of a Containerpilot job.
+* `command`[REQUIRED] (string) = the command used to start your application. This will be executed as part of a Containerpilot job.
 * `app_config_dir` (string) = the directory where you application's configuration files will reside. Currently this must be in /etc.
 Default = `/etc/{{ project_name }}`
 * `custom_orchestration_dir` = the location where you want your custom application orchestration config template to output to. This is 
 not container orchestration (e.g. docker-compose.yml) but how you want to orchestrate your application (e.g. containerpilot.json). The
 default is /etc inside your container.
 * `upstreams` (list) = a list of service names, registered in Consul and which your application depends upon
-* `downstreams` (list) = a list of clients which are registed in Consul as a service; and your application may want to configure access for
+* `downstreams` (list) = a list of clients which are registered in Consul as a service; and your application may want to configure access for
+* `test_script` (string) = if you want to perform any kind of unit tests of your application, set this value to the location of
+that script. The playbook will then use this to create a `docker-compose-units.yml` file and set the entry point to this script.
+**This will completely override the startup, so your script must include starting your application in the way expected.
 
 See vars/main.yml and defaults/main.yml for others variables and their descriptions and any non-declared container orchestration 
 options like mem_limit (defaults to 128MB)are best updated in the compose files at the end.
@@ -101,7 +104,7 @@ for `svc_discovery`, then the consul agent running inside the container will sim
 job is a service, it will still run as expected.
 1. If you set `svc_discovery=consul`, you will also get service defined in the file `docker-compose-integrations.yml`. This will allow 
 you to perform a proper integration test and see if your application registers as a service correctly. See 
-[Standard Integration tests below](#standard-integration-tests)
+[Standard Integration tests below](#Testing-Standard-Integration-Tests)
 
 ## Event management
 Likewise, event management and monitoring (EMM) is a large subject an beyond the scope of this documentation. The Concierge Paradigm makes
@@ -228,24 +231,80 @@ Technically we've found [Joyent's Triton Container Runtime Platform](https://www
 clouds, and they require containers to run in bridge network mode. Therefor, if left unset we add a commented `network_mode=bridge` 
 in the outputted compose files. Later, the playbook will work out which platform you're deploying to and uncomment this if necessary
 but for now if you plan to deploy to Triton, simply uncomment.
+### Overrides<a name="Customising-Overrides"></a>
+As part of running the playbook a set of Docker Compose files will be generated. A standared `docker-compose.yml`
+ file which will contain a basic definition of your application as a service and in the context of being orchestrated
+ from within, by Containerpilot. It will also create a `docker-compose-units.yml` file which contains a service
+ definition without any orchestration or monitoring definitions and the entrypoint set to `test_script` (if set) or `command`
+ (if not).  Lastly, it will create a `docker-compose-integration-yml` file with a consul service defined if `svc_discovery`
+ is set.
+
+It is recommended that you make use of the [multiple compose files principle](https://docs.docker.com/compose/extends/#extending-services)
+ for extending these files to include any further integrations or changes you may need. The following diagram outlines how this
+ may work when trying override or extend the generated files.
+
+![overriding generated compose files](https://raw.githubusercontent.com/mesoform/concierge-app-playbook/master/docs/dockercomposetestingoverridepattern.svg)
+
+As with most other parts of this playbook. These override files can be templated. Simply drop the corresponding override template
+ into the `templates/orchestration` directory with the .j2 extension and it will be processed accordingly. For example,
+ if you want to override `docker-compose.yml`add a `docker-compose-override.yml.j2` file. Content something like:
+```
+version: '2.1'
+services:
+  {{ project_name }}:
+    extends: docker-compose.yml
+    service: {{ project_name }}
+    command: 'test'
+
+```
+This can be called just by running `docker-compose up`
+
+Or to override the unit tests, add `docker-compose-units-override.yml.j2`, with something like:
+```
+version: '2.1'
+services:
+  {{ project_name }}:
+    extends: docker-compose-units.yml
+    service: {{ project_name }}
+    command: 'test'
+
+```
+This can be called by running `docker-compose -f docker-compose-units.yml -f docker-compose-units-override.yml up`
+
 
 ## Testing (WIP)
 Some tests are included as part of the playbook and we’ve also included a simple, plugin-like function for including your own. The 
 details of which area covered below.
+### Unit testing
+As part of CICD you may want to ensure that your application start and responds without all of the involved orchestration.
+ Therefore, the `create-concierge-tests` playbook will generate an additional `docker-compose-units.yml` file. If you have
+ created a script for your testing and set it as the value of `test_script`, then the `entrypoint` in this compose
+ file will be set to run the test script. Otherwise, it will be set to run `command`.  Either way, you can override
+ any settings in this file by using an override file as described in the [override section](#Customising-Overrides).
 ### Standard system tests (not implemented)
 not implemented - as a basic set of checks, the testing role will assert that the following jobs are running:
 * Consul agent (only if `svc_discovery` is defined)
 * Zabbix agent (only if `event_management` is defined)
 * your project's main application job
-### Standard Integration tests<a name="standard-integration-tests"></a>
-Basic integration tests will also be performed if you have at least one of `svc_discovery` or `event_management` are defined.
-* `svc_discovery` being set will automatically spin up a Consul server in the same network as your application. You can check that 
-the service has registered by connecting to the Consul UI on port 8500 (or whatever Docker mapped it to)
-* _(WIP) `event_management` being set will automatically spin up a Zabbix server in the same network as your application. You can 
-check that the service has registered by connecting to the Zabbix UI on port 80 (or whatever Docker mapped it to)_
-### User-defined tests (WIP)
-Soon we will implement a method of dropping in test files or templates into the relevant tests directory and have it processed. 
-Running an integration system will simply be a case of providing the required Docker compose file/template.
+### Standard Integration tests<a name="Testing-Standard-Integration-Tests"></a>
+Basic integration tests are catered for through generating a `docker-compose-integrations.yml` file which will include
+ a service definition of consul, if `svc_discovery` is set. This file can be [overriden](#Customising-Overrides)
+ and integrations will need to be ordered correctly to handle any dependencies. For example, if you want to 
+ override both the standard service definition and the integrations, you will need to create the additional overidde
+ files and run:
+ ```
+docker-compose \
+  -f docker-compose-integrations.yml \
+  -f docker-compose-integrations-override.yml \
+  -f docker-compose.yml \
+  -f docker-compose-override.yml \
+  up
+```
+
+_(To Do) provide the same default integration definition for `event_management` being set, which will automatically 
+ spin up a Zabbix server in the same network as your application and allow you to check that the service has registered 
+ by connecting to the Zabbix UI on port 80 (or whatever Docker mapped it to)_
+
 
 ## Examples
 Have a look at our [example Apache application configured as a forward proxy](https://github.com/mesoform/apache-fwdproxy). We also 
