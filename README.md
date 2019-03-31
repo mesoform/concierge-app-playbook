@@ -243,7 +243,7 @@ It is recommended that you make use of the [multiple compose files principle](ht
  for extending these files to include any further integrations or changes you may need. The following diagram outlines how this
  may work when trying override or extend the generated files.
 
-![overriding generated compose files](https://raw.githubusercontent.com/mesoform/concierge-app-playbook/master/docs/dockercomposetestingoverridepattern.svg)
+![overriding generated compose files](./docs/dockercomposetestingoverridepattern.svg)
 
 As with most other parts of this playbook. These override files can be templated. Simply drop the corresponding override template
  into the `templates/orchestration` directory with the .j2 extension and it will be processed accordingly. For example,
