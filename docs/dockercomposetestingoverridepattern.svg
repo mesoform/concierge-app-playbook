@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="184.719597mm" height="111.708709mm" version="1.1" viewBox="84.503654 -15.176926 959.958191 580.532288">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="263.501004mm" height="121.193479mm" version="1.1" viewBox="-227.222549 -29.677368 1369.372559 629.823120">
   <!--
 	Exported with Concepts: Smarter Sketching
 	Version: 660
@@ -51,11 +51,6 @@
         <tspan x="0" dy="0.000em">-f</tspan>
       </text>
     </g>
-    <g id="LABEL_E68A58BC-56C6-4505-BF5D-8A646D167E1B" opacity="1.000" transform="matrix(1.857147 -0.000006 0.000006 1.871734 132.094406 170.219849)">
-      <text x="0" y="0" text-anchor="middle" alignment-baseline="mathematical" font-size="24.000" font-weight="lighter" fill="#000000" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif">
-        <tspan x="0" dy="0.000em">-f</tspan>
-      </text>
-    </g>
     <g id="LABEL_F6B25A82-3D1C-4805-8BB4-E933C92C4277" opacity="1.000" transform="matrix(1.857153 -0.000006 0.000006 1.871734 477.094391 176.219849)">
       <text x="0" y="0" text-anchor="middle" alignment-baseline="mathematical" font-size="24.000" font-weight="lighter" fill="#000000" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif">
         <tspan x="0" dy="0.000em">-f</tspan>
@@ -95,5 +90,16 @@
     <path id="STROKE_C6FF1F02-59AF-488C-B3B6-525D9F6E9EB2" opacity="1.000" fill="none" stroke="#a4daef" stroke-width="4.165" stroke-opacity="1.000" stroke-linecap="round" stroke-linejoin="round" d="M 98.417 282.809 L 1032.468 282.809 L 1032.468 553.361 L 98.418 553.362 Z"></path>
     <path id="STROKE_9DFFAD29-8DAE-4AF2-AA0B-7687D9AB998B" opacity="1.000" fill="none" stroke="#a4daef" stroke-width="2.629" stroke-opacity="1.000" stroke-linecap="round" stroke-linejoin="round" d="M 97.236 141.529 L 789.649 141.529 L 789.650 276.142 L 97.237 276.143 Z"></path>
     <path id="STROKE_3A96209B-49AC-4322-AA68-873A61A5155D" opacity="1.000" fill="none" stroke="#a4daef" stroke-width="2.666" stroke-opacity="1.000" stroke-linecap="round" stroke-linejoin="round" d="M 95.748 -3.933 L 792.638 -3.933 L 792.638 133.603 L 95.749 133.604 Z"></path>
+    <g id="LABEL_D555C0C6-077E-4CFD-BB82-9D54A1149153" opacity="1.000" transform="matrix(1.380924 0.000000 0.000000 1.380924 -57.011520 275.858704)">
+      <text x="0" y="0" text-anchor="middle" alignment-baseline="mathematical" font-size="24.000" font-weight="lighter" fill="#000000" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif">
+        <tspan x="0" dy="0.000em">$ docker-compose</tspan>
+      </text>
+    </g>
+    <g id="LABEL_923F68E0-1602-4004-AF96-09DBEFBD2FD4" opacity="1.000" transform="matrix(1.380924 0.000000 0.000000 1.380924 1082.445068 266.337830)">
+      <text x="0" y="0" text-anchor="middle" alignment-baseline="mathematical" font-size="24.000" font-weight="lighter" fill="#000000" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif">
+        <tspan x="0" dy="0.000em">up</tspan>
+      </text>
+    </g>
+    <path id="STROKE_7D1A214B-FF0F-4505-A30F-A97B4614FEE3" opacity="1.000" fill="none" stroke="#fac141" stroke-width="3.952" stroke-opacity="1.000" stroke-linecap="round" stroke-linejoin="round" d="M -211.321 -13.775 L 1126.248 -13.776 L 1126.249 584.244 L -211.320 584.244 Z"></path>
   </g>
 </svg>

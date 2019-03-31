@@ -252,9 +252,10 @@ As with most other parts of this playbook. These override files can be templated
 version: '2.1'
 services:
   {{ project_name }}:
-    extends: docker-compose.yml
-    service: {{ project_name }}
-    command: 'test'
+    extends: 
+      file: docker-compose.yml
+      service: {{ project_name }}
+    command: 'test.sh'
 
 ```
 This can be called just by running `docker-compose up`
@@ -264,12 +265,13 @@ Or to override the unit tests, add `docker-compose-units-override.yml.j2`, with 
 version: '2.1'
 services:
   {{ project_name }}:
-    extends: docker-compose-units.yml
-    service: {{ project_name }}
-    command: 'test'
+    extends: 
+      file: docker-compose-units.yml
+      service: {{ project_name }}
+    command: 'test.sh'
 
 ```
-This can be called by running `docker-compose -f docker-compose-units.yml -f docker-compose-units-override.yml up`
+This can be called by running `docker-compose -f docker-compose-units-override.yml up`
 
 
 ## Testing (WIP)
@@ -294,9 +296,7 @@ Basic integration tests are catered for through generating a `docker-compose-int
  files and run:
  ```
 docker-compose \
-  -f docker-compose-integrations.yml \
   -f docker-compose-integrations-override.yml \
-  -f docker-compose.yml \
   -f docker-compose-override.yml \
   up
 ```
